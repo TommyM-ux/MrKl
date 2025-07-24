@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Duhový pruh – Yarn and Colors</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .rainbow-strip {
+      width: 100%;
+      height: 100px;
+      background: linear-gradient(90deg,
+        #ff595e, #ffca3a, #8ac926, #1982c4,
+        #6a4c93, #f72585, #4cc9f0, #ffbe0b,
+        #3a86ff, #8338ec, #ff595e);
+      background-size: 200% auto;
+      animation: scrollGradient 12s linear infinite;
+    }
+
+    @keyframes scrollGradient {
+      0% { background-position: 0% 0%; }
+      100% { background-position: -100% 0%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="rainbow-strip"></div>
+</body>
+</html>
