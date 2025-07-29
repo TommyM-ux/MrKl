@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yarn and Colors</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Segoe UI;
+      background-color: #111;
+    }
+
+    .banner {
+      position: relative;
+      height: 100px;
+      overflow: hidden;
+    }
+
+    .rainbow {
+      position: absolute;
+      width: 200%;
+      height: 100%;
+      background: linear-gradient(90deg, 
+        red, orange, yellow, green, cyan, blue, violet, red);
+      animation: scroll 10s linear infinite;
+    }
+
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    .banner-text {
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      color: white;
+      font-size: 1.8em;
+      line-height: 100px;
+      font-weight: normal;
+      text-shadow: 1px 1px 4px black;
+      z-index: 10;
+      pointer-events: none;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .footer {
+      text-align: center;
+      color: #aaa;
+      margin-top: 10px;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="banner">
+    <div class="rainbow"></div>
+    <div class="banner-text" id="bannerText">Objevte Yarn and Colors ✨</div>
+  </div>
+
+  <div class="footer">
+    &copy; 2025 MrKlubíčko.cz — Yarn and Colors
+  </div>
+
+  <script>
+    const texts = [
+      "Objevte Yarn and Colors ",
+      "Dodej k háčku barvu 🌈",
+      "Barvy, které tě přichytí ",
+      "Kreativita bez hranic ",
+      "Pro pletaře i háčkovací snílky 🧵"
+    ];
+
+    let index = 0;
+    const textElement = document.getElementById("bannerText");
+
+    setInterval(() => {
+      index = (index + 1) % texts.length;
+      textElement.style.opacity = 0;
+
+      setTimeout(() => {
+        textElement.textContent = texts[index];
+        textElement.style.opacity = 1;
+      }, 500);
+    }, 3000);
+  </script>
+
+</body>
+</html>
