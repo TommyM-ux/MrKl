@@ -8,32 +8,38 @@
 <body>
 
 <h1>MK Sweater Calculator</h1>
-<form id="calculator">
+<div class="calculator">
 
-  <label>
-    Hustota (oka na 10 cm)<br>
-    <input type="number" id="gauge" value="20" step="0.1">
-  </label>
-  <br><br>
+<h1>MK Sweater Calculator</h1>
 
-  <label>
-    Šířka svetru (cm)<br>
-    <input type="number" id="width" value="50">
-  </label>
-  <br><br>
+<div class="calculator">
 
-  <label>
-    Délka svetru (cm)<br>
-    <input type="number" id="length" value="60">
-  </label>
-  <br><br>
+  <form id="calculator">
 
-  <button type="button" id="calculate">Spočítat</button>
-</form>
+    <label>
+      Hustota (oka na 10 cm)<br>
+      <input type="number" id="gauge" value="20" step="0.1">
+    </label>
+    <br><br>
 
-<hr>
+    <label>
+      Šířka svetru (cm)<br>
+      <input type="number" id="width" value="50">
+    </label>
+    <br><br>
 
-<div id="result"></div>
+    <label>
+      Délka svetru (cm)<br>
+      <input type="number" id="length" value="60">
+    </label>
+    <br><br>
+
+    <button type="button" id="calculate">Spočítat</button>
+  </form>
+
+  <div id="result"></div>
+
+</div>
 
 
 <script src="./app.js"></script>
