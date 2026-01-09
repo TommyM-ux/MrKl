@@ -4,20 +4,16 @@ document.getElementById("calculate").addEventListener("click", () => {
   const length = parseFloat(document.getElementById("length").value);
 
   if (!gauge || !width || !length) {
-    document.getElementById("result").innerHTML = "Vyplň všechny hodnoty.";
+    document.getElementById("result").innerText = "Vyplň všechny hodnoty.";
     return;
   }
 
-  // počet ok na šířku
   const stitches = Math.round((gauge / 10) * width);
-
-  // velmi hrubý odhad spotřeby (zatím jen demo)
-  const area = width * length; // cm²
-  const yarnEstimate = Math.round(area * 0.03); // g – placeholder logika
+  const area = width * length;
+  const yarnEstimate = Math.round(area * 0.03);
 
   document.getElementById("result").innerHTML = `
-    <h2>Výsledek</h2>
-    <p><strong>Počet ok:</strong> ${stitches}</p>
-    <p><strong>Odhad spotřeby:</strong> cca ${yarnEstimate} g příze</p>
+    <strong>Počet ok:</strong> ${stitches}<br>
+    <strong>Odhad spotřeby:</strong> cca ${yarnEstimate} g příze
   `;
 });
