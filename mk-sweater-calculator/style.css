@@ -32,7 +32,7 @@ label {
   display: block;
   font-size: 0.9rem;
   color: var(--muted);
-  margin-bottom: 6px;
+  margin-bottom: 12px;
 }
 
 input {
@@ -41,11 +41,7 @@ input {
   border-radius: 10px;
   border: 1px solid var(--border);
   font-size: 1rem;
-}
-
-input:focus {
-  outline: none;
-  border-color: var(--accent);
+  margin-top: 4px;
 }
 
 button {
@@ -58,10 +54,6 @@ button {
   background: var(--accent);
   color: #fff;
   cursor: pointer;
-}
-
-button:hover {
-  opacity: 0.9;
 }
 
 #result {
