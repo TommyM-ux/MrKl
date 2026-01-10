@@ -3,37 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const EVEN = (n) => Math.round(n / 2) * 2;
 
   // Pokud nemáš v HTML přepínač "Klasik/Úzký", doplníme ho dynamicky
-  function ensureFitSelector() {
-    const form = document.querySelector('form');
-    if (!form) return;
-
-    if ($('fitStyle')) return; // už existuje
-
-    // vložíme hned pod režim / hotový obvod (na konec prvních řádků)
-    const firstRow = form.querySelector('.mk-row');
-    if (!firstRow) return;
-
-    const wrap = document.createElement('div');
-    wrap.className = 'mk-row';
-    wrap.innerHTML = `
-      <div class="mk-field">
-        <label>Střih rukávu</label>
-        <select id="fitStyle">
-          <option value="classic" selected>Klasik (běžný)</option>
-          <option value="narrow">Úzký (štíhlejší)</option>
-        </select>
-      </div>
-      <div class="mk-field">
-        <label title="Hloubka průramku = poměr z hotového obvodu. Např. 0,245 × 100 cm = 24,5 cm.">
-          Hloubka průramku (poměr)
-        </label>
-        <input id="armRatio" type="number" step="0.001" value="0.245" inputmode="decimal">
-      </div>
-    `;
-
-    // vlož hned za první mk-row
-    firstRow.insertAdjacentElement('afterend', wrap);
-  }
+  
 
   function clamp(n, min, max) {
     return Math.max(min, Math.min(max, n));
@@ -69,10 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const sleeveTop = EVEN(roundIntFromInput('sleeveTop', 110));
 
     // Fit: classic / narrow
-    const fitStyle = $('fitStyle') ? $('fitStyle').value : 'classic';
+    const fitStyle = 'classic';
 
     // Hloubka průramku poměrem – můžeš ručně, ale hlídáme rozumné meze
-    const defaultRatio = fitStyle === 'narrow' ? 0.225 : 0.245;
+    const defaultRatio = 0.245;
     const armRatio = clamp(readFloat('armRatio', defaultRatio), 0.18, 0.30);
 
     if (!finished || !stsVal || !rowsVal || !sleeveTop) {
@@ -96,9 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const armDepthCm = Math.round((finished * armRatio) * 10) / 10; // 1 desetina cm ok
     const armRows = EVEN(Math.round(armDepthCm * rowsPerCm));
 
-    const armDrop = fitStyle === 'narrow'
-      ? EVEN(pieceSts * 0.07)
-      : 12; // KF-ish fix (tvoje preference z dřívějška)
+    const armDrop = 12
+      
 
     const armBO = 3; // držíme konzistentně jako KF
     const armDec = Math.max(0, Math.floor((armDrop - armBO * 2) / 2));
