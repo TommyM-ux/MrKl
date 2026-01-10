@@ -2,13 +2,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const $ = id => document.getElementById(id);
   const EVEN = n => Math.round(n / 2) * 2;
 
-  // Automatická aktualizace políčka poměru při změně režimu
+  // Oprava EU režimu: Okamžitá změna poměru v políčku
   $('mode').onchange = (e) => {
     $('armPct').value = e.target.value === 'KF' ? 0.245 : 0.22;
   };
 
   function generate() {
     const mode = $('mode').value;
+    
+    // Načtení vstupů (tady pletařka může psát desetiny pro přesnost)
     const finished = parseFloat($('finished').value);
     const stsValue = parseFloat($('sts').value);
     const rowsValue = parseFloat($('rows').value);
@@ -16,63 +18,120 @@ document.addEventListener('DOMContentLoaded', () => {
     const armPctInput = parseFloat($('armPct').value);
 
     if (isNaN(finished) || isNaN(stsValue) || isNaN(rowsValue)) {
-      alert('Prosím, vyplňte všechna číselná pole.');
+      alert('Prosím, vyplňte všechna pole.');
       return;
     }
 
     const stsPerCm = stsValue / 10;
     const rowsPerCm = rowsValue / 10;
 
-    // --- VÝSLEDKY OKA A ŘADY (Vždy celá čísla) ---
-    const pieceSts = EVEN(finished * stsPerCm / 2);
-    const sleeveTop = EVEN(sleeveTopInput);
-    const bodyLenCm = Math.round(finished * 0.38);
+    /* ============================================================
+       VÝPOČTY - VŠE NATVRDO ZAOKROUHLENO NA CELÁ ČÍSLA (ŽÁDNÉ DESETINY!)
+    ============================================================ */
+    const bodyLenCm   = Math.round(finished * 0.38);
     const sleeveLenCm = Math.round(finished * 0.45);
+    const pieceSts    = EVEN(finished * stsPerCm / 2);
+    const sleeveTop   = EVEN(sleeveTopInput);
 
     // Průramek
     const armDepthPct = armPctInput || (mode === 'KF' ? 0.245 : 0.22);
-    const armRows = EVEN(Math.round(finished * armDepthPct * rowsPerCm));
+    const armRows     = EVEN(Math.round(finished * armDepthPct * rowsPerCm));
     
     let armDrop, armBO;
     if (mode === 'KF') {
       armDrop = 12; 
-      armBO = 3;
+      armBO   = 3;
     } else {
       armDrop = EVEN(pieceSts * 0.08);
-      armBO = Math.max(2, Math.round(armDrop * 0.3));
+      armBO   = Math.max(2, Math.round(armDrop * 0.3));
     }
-    const armDec = Math.round((armDrop - armBO * 2) / 2);
-    const armRemain = pieceSts - armDrop;
+    
+    const armDec    = Math.round((armDrop - armBO * 2) / 2);
+    const armRemain = Math.round(pieceSts - armDrop);
 
-    // Hlavice
-    const sleeveCapBO = mode === 'KF' ? 3 : Math.max(2, Math.round(sleeveTop * 0.05));
-    const capRemain = Math.min(26, Math.max(14, EVEN(sleeveTop * 0.18)));
-    const capDec = Math.round((sleeveTop - sleeveCapBO * 2 - capRemain) / 2);
+    // Hlavice rukávu
+    const sleeveCapBO  = mode === 'KF' ? 3 : Math.max(2, Math.round(sleeveTop * 0.05));
+    const capTopTarget = Math.min(26, Math.max(14, EVEN(sleeveTop * 0.18)));
+    const capDec       = Math.round((sleeveTop - sleeveCapBO * 2 - capTopTarget) / 2);
 
+    /* ============================================================
+       TEXTY PŘESNĚ PODLE TVÉHO PŮVODNÍHO SOUBORU
+    ============================================================ */
     $('out').innerHTML = `
       <div class="mk-toggle">
-        <label style="cursor:pointer"><input type="checkbox" id="compactToggle"> <strong>Stručný tahák</strong></label>
+        <label style="cursor:pointer">
+          <input type="checkbox" id="compactToggle">
+          Zobrazit stručný přehled (tahák)
+        </label>
       </div>
+
       <div id="fullText">
-        <h3>🧶 Váš návod</h3>
-        <p>Vzorek: ${stsValue} ok / ${rowsValue} řad na 10 cm.</p>
-        <h4>Tělo</h4>
-        <p>Nahodíte <strong>${pieceSts} ok</strong>. Pletete do výšky <strong>${bodyLenCm} cm</strong>.</p>
-        <h4>Průramek</h4>
-        <p>BO <strong>${armBO} ok</strong> na začátku 2 řad. Poté <strong>${armDec}×</strong> ujmout 1 oko ob řadu. Zůstane <strong>${armRemain} ok</strong>. Celkem <strong>${armRows} řad</strong>.</p>
+        <h3>🧶 Návod na pletení – svetr s všitým rukávem</h3>
+        <p>
+          <strong>Vzorek:</strong><br>
+          ${stsValue} ok a ${rowsValue} řad na 10 cm v hladkém žerzeji.
+        </p>
+
+        <h4>Zadní a přední díl</h4>
+        <p>
+          Nahodíte <strong>${pieceSts} ok</strong> a upletete spodní lem dle vlastního výběru. 
+          Poté pokračujte v hladkém žerzeji rovně až do výšky cca <strong>${bodyLenCm} cm</strong>, 
+          tedy do začátku průramku.
+        </p>
+
+        <h4>Tvarování průramku</h4>
+        <p>
+          Na začátku následujících dvou řad uzavřete vždy <strong>${armBO} oka</strong>.
+        </p>
+        <p>
+          Dále <strong>${armDec}×</strong> opakujte:
+        </p>
+        <ul>
+          <li>1 řadu upleťte rovně</li>
+          <li>v následující řadě ujměte 1 oko na každém konci jehlice</li>
+        </ul>
+        <p>
+          Po vytvarování průramku vám zůstane <strong>${armRemain} ok</strong>. 
+          Celková výška průramku je přibližně <strong>${armRows} řad</strong> (končí na lícové řadě).
+        </p>
+
         <h4>Rukáv</h4>
-        <p>Pletete k bicepsu do <strong>${sleeveLenCm} cm</strong> (<strong>${sleeveTop} ok</strong>). BO <strong>${sleeveCapBO} ok</strong> na začátku 2 řad. Poté <strong>${capDec}×</strong> ujmout každý líc. Uzavřít zbylých <strong>${capRemain} ok</strong>.</p>
+        <p>
+          Rukáv pleťte od manžety a postupně přidávejte oka, dokud po délce cca <strong>${sleeveLenCm} cm</strong> 
+          nedosáhnete nejširší části rukávu o <strong>${sleeveTop} okách</strong>.
+        </p>
+
+        <h4>Hlavice rukávu</h4>
+        <p>
+          Na začátku následujících dvou řad uzavřete vždy <strong>${sleeveCapBO} oka</strong>.
+        </p>
+        <p>
+          Poté <strong>${capDec}×</strong> ujměte 1 oko na každém konci v každém lícovém řádku.
+        </p>
+        <p>
+          Nakonec uzavřete zbývajících <strong>${capTopTarget} ok</strong> najednou.
+        </p>
       </div>
+
       <div id="compactText" style="display:none">
-        <p><strong>Tělo:</strong> ${pieceSts} ok | <strong>Průramek:</strong> BO ${armBO}, ${armDec}× ujmout (${armRows} řad) | <strong>Rukáv:</strong> ${sleeveTop} ok | <strong>Hlavice:</strong> BO ${sleeveCapBO}, ${capDec}× ujmout, BO ${capRemain}.</p>
+        <h3>Stručný přehled (tahák)</h3>
+        <p>
+          <strong>Tělo:</strong> ${pieceSts} ok<br>
+          <strong>Průramek:</strong> BO ${armBO}, ${armDec}× ujmout ob řadu (${armRows} řad)<br>
+          <strong>Rukáv:</strong> ${sleeveTop} ok<br>
+          <strong>Hlavice:</strong> BO ${sleeveCapBO}, ${capDec}× ujmout na každém líci, BO ${capTopTarget}
+        </p>
       </div>
     `;
 
+    // Toggle přepínač
     $('compactToggle').onchange = e => {
       $('fullText').style.display = e.target.checked ? 'none' : 'block';
       $('compactText').style.display = e.target.checked ? 'block' : 'none';
     };
+
     $('printBtn').style.display = 'inline-block';
   }
+
   $('calc').onclick = generate;
 });
