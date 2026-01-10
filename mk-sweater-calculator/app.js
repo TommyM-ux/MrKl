@@ -1,62 +1,76 @@
 document.addEventListener('DOMContentLoaded', () => {
   const $ = id => document.getElementById(id);
-  const EVEN = n => Math.round(n / 2) * 2;
+  const EVEN = n => Math.round(Math.round(n) / 2) * 2;
 
-  // Oprava EU režimu: Okamžitá změna poměru v políčku
+  // Oprava EU režimu: Automatická změna poměru v políčku
   $('mode').onchange = (e) => {
     $('armPct').value = e.target.value === 'KF' ? 0.245 : 0.22;
   };
 
   function generate() {
     const mode = $('mode').value;
-    
-    // Načtení vstupů (tady pletařka může psát desetiny pro přesnost)
-    const finished = parseFloat($('finished').value);
-    const stsValue = parseFloat($('sts').value);
-    const rowsValue = parseFloat($('rows').value);
-    const sleeveTopInput = parseFloat($('sleeveTop').value);
-    const armPctInput = parseFloat($('armPct').value);
 
-    if (isNaN(finished) || isNaN(stsValue) || isNaN(rowsValue)) {
-      alert('Prosím, vyplňte všechna pole.');
-      return;
-    }
+    // VSTUPY - bereme jako celá čísla, aby pletařku nemátly desetiny
+    const finished   = Math.round($('finished').value);
+    const stsValue   = Math.round($('sts').value);
+    const rowsValue  = Math.round($('rows').value);
+    const sleeveTop  = EVEN($('sleeveTop').value);
 
-    const stsPerCm = stsValue / 10;
-    const rowsPerCm = rowsValue / 10;
+    // Pomocné hodnoty pro výpočty
+    const stsPerCm   = stsValue / 10;
+    const rowsPerCm  = rowsValue / 10;
 
-    /* ============================================================
-       VÝPOČTY - VŠE NATVRDO ZAOKROUHLENO NA CELÁ ČÍSLA (ŽÁDNÉ DESETINY!)
-    ============================================================ */
+    /* ======================
+       ORIENTAČNÍ DÉLKY (UX)
+    ====================== */
     const bodyLenCm   = Math.round(finished * 0.38);
     const sleeveLenCm = Math.round(finished * 0.45);
-    const pieceSts    = EVEN(finished * stsPerCm / 2);
-    const sleeveTop   = EVEN(sleeveTopInput);
 
-    // Průramek
-    const armDepthPct = armPctInput || (mode === 'KF' ? 0.245 : 0.22);
-    const armRows     = EVEN(Math.round(finished * armDepthPct * rowsPerCm));
-    
-    let armDrop, armBO;
-    if (mode === 'KF') {
-      armDrop = 12; 
-      armBO   = 3;
-    } else {
-      armDrop = EVEN(pieceSts * 0.08);
-      armBO   = Math.max(2, Math.round(armDrop * 0.3));
-    }
-    
+    /* ======================
+       TĚLO
+    ====================== */
+    const totalSts = EVEN(finished * stsPerCm);
+    const pieceSts = totalSts / 2;
+
+    /* ======================
+       PRŮRAMEK
+    ====================== */
+    const armDepthPct = parseFloat($('armPct').value);
+
+    const armRows = EVEN(
+      Math.round(finished * armDepthPct * rowsPerCm)
+    );
+
+    const armDrop = mode === 'KF'
+      ? 12
+      : EVEN(pieceSts * 0.08);
+
+    const armBO = mode === 'KF'
+      ? 3
+      : Math.max(2, Math.round(armDrop * 0.3));
+
     const armDec    = Math.round((armDrop - armBO * 2) / 2);
-    const armRemain = Math.round(pieceSts - armDrop);
+    const armRemain = pieceSts - armDrop;
 
-    // Hlavice rukávu
-    const sleeveCapBO  = mode === 'KF' ? 3 : Math.max(2, Math.round(sleeveTop * 0.05));
-    const capTopTarget = Math.min(26, Math.max(14, EVEN(sleeveTop * 0.18)));
-    const capDec       = Math.round((sleeveTop - sleeveCapBO * 2 - capTopTarget) / 2);
+    /* ======================
+       HLAVICE RUKÁVU
+    ====================== */
+    const sleeveCapBO = mode === 'KF'
+      ? 3
+      : Math.max(2, Math.round(sleeveTop * 0.05));
 
-    /* ============================================================
-       TEXTY PŘESNĚ PODLE TVÉHO PŮVODNÍHO SOUBORU
-    ============================================================ */
+    const capRemain = Math.min(
+      26,
+      Math.max(14, EVEN(sleeveTop * 0.18))
+    );
+
+    const capDec = Math.round(
+      (sleeveTop - sleeveCapBO * 2 - capRemain) / 2
+    );
+
+    /* ======================
+       VÝSTUP - TVÉ TEXTY
+    ====================== */
     $('out').innerHTML = `
       <div class="mk-toggle">
         <label style="cursor:pointer">
@@ -67,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       <div id="fullText">
         <h3>🧶 Návod na pletení – svetr s všitým rukávem</h3>
+
         <p>
           <strong>Vzorek:</strong><br>
           ${stsValue} ok a ${rowsValue} řad na 10 cm v hladkém žerzeji.
@@ -109,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
           Poté <strong>${capDec}×</strong> ujměte 1 oko na každém konci v každém lícovém řádku.
         </p>
         <p>
-          Nakonec uzavřete zbývajících <strong>${capTopTarget} ok</strong> najednou.
+          Nakonec uzavřete zbývajících <strong>${capRemain} ok</strong> najednou.
         </p>
       </div>
 
@@ -119,12 +134,11 @@ document.addEventListener('DOMContentLoaded', () => {
           <strong>Tělo:</strong> ${pieceSts} ok<br>
           <strong>Průramek:</strong> BO ${armBO}, ${armDec}× ujmout ob řadu (${armRows} řad)<br>
           <strong>Rukáv:</strong> ${sleeveTop} ok<br>
-          <strong>Hlavice:</strong> BO ${sleeveCapBO}, ${capDec}× ujmout na každém líci, BO ${capTopTarget}
+          <strong>Hlavice:</strong> BO ${sleeveCapBO}, ${capDec}× ujmout na každém líci, BO ${capRemain}
         </p>
       </div>
     `;
 
-    // Toggle přepínač
     $('compactToggle').onchange = e => {
       $('fullText').style.display = e.target.checked ? 'none' : 'block';
       $('compactText').style.display = e.target.checked ? 'block' : 'none';
