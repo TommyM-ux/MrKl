@@ -26,15 +26,24 @@
           <div class="mk-field">
             <label>Režim výpočtu</label>
             <select id="mode">
-              <option value="KF" selected>KF (klasický střih)</option>
-              <option value="EU">EU (podle těla)</option>
+<option value="KF" selected>Klasický (KF – volnější střih)</option>
+    <option value="EU">Úzký (EU – střih na tělo)</option>
             </select>
           </div>
-          <div class="mk-field">
-            <label>Hotový obvod (cm)</label>
-            <input id="finished" type="number" value="102">
-          </div>
-        </div>
+           <p class="mk-help">
+    Volba střihu ovlivňuje hlavně <strong>hloubku průramku</strong>, <strong>šířku rukávu nahoře</strong>
+    a <strong>prostor v ramenou</strong>. Nejde o jiný postup pletení, jen o jiné proporce.
+  </p>
+            </div>
+            <div class="mk-field">
+  <label for="finished">Obvod hrudníku – hotový svetr (cm)</label>
+  <input id="finished" type="number" step="1" inputmode="numeric" value="102">
+  <p class="mk-help">
+    Jedná se o obvod <strong>hotového svetru</strong> měřený přes hrudník (pod průramky).
+    Pokud měříte podle hotového svetru naležato, změřte šířku a vynásobte dvěma.
+  </p>
+</div>
+
         <div class="mk-row">
           <div class="mk-field">
             <label>Vzorek – oka / 10 cm</label>
@@ -48,10 +57,12 @@
           </div>
         </div>
         <div class="mk-row">
-          <div class="mk-field">
-            <label>Rukáv nahoře (oka)</label>
-            <input id="sleeveTop" type="number" value="110">
-          </div>
+          <p class="mk-help">
+  Počet ok v nejširší části rukávu (u bicepsu / horní části paže) těsně před hlavicí.
+  Hodnotu upravte podle vlastního vzorku:
+  <strong>obvod rukávu (cm) × (oka/10 cm) ÷ 10 = oka rukávu nahoře</strong>.
+</p>
+</div>
           <div class="mk-field">
             <label>Hloubka průramku (poměr)</label>
             <input id="armPct" type="number" step="0.01" value="0.245">
