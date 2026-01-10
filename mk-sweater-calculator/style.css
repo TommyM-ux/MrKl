@@ -1,73 +1,134 @@
 :root {
-  --bg: #f6f7f5;
-  --card: #ffffff;
-  --text: #222;
-  --muted: #666;
-  --accent: #3a7d6c;
-  --border: #ddd;
+  --accent: #ee6e62;
+  --text: #1c1c1c;
+  --border: #e7e7e7;
+  --bg-card: #fff;
+  --bg-input: #eee;
 }
 
-body {
-  margin: 0;
-  padding: 24px;
-  background: var(--bg);
+.mk-sweatercalc {
   font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   color: var(--text);
 }
 
-h1 {
-  margin: 0 0 16px 0;
-  font-size: 1.8rem;
+.mk-wrap {
+  max-width: 980px;
+  margin: auto;
+  padding: 20px;
 }
 
-.calculator {
-  max-width: 420px;
-  background: var(--card);
-  padding: 24px;
+.mk-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.mk-card {
+  border: 1px solid var(--border);
   border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  padding: 18px;
+  background: var(--bg-card);
 }
 
-label {
-  display: block;
-  font-size: 0.9rem;
-  color: var(--muted);
+.mk-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
   margin-bottom: 14px;
 }
 
-input {
-  width: 100%;
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  font-size: 1rem;
-  margin-top: 4px;
+.mk-field label {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  display: block;
 }
 
-input:focus {
-  outline: none;
-  border-color: var(--accent);
+.mk-field input, .mk-field select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
 }
 
-button {
-  width: 100%;
-  margin-top: 12px;
-  padding: 12px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 999px;
+.mk-btn {
   background: var(--accent);
   color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-weight: 700;
   cursor: pointer;
 }
 
-button:hover {
-  opacity: 0.9;
+.mk-btn--ghost {
+  background: var(--bg-input);
+  color: #333;
+  margin-left: 8px;
 }
 
-#result {
+.mk-actions {
+  margin-top: 10px;
+}
+
+.mk-muted {
+  color: #777;
+  font-size: 14px;
+}
+
+.mk-brand {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.mk-logo {
+  height: 40px;
+}
+
+.mk-output h3 {
+  margin-top: 0;
+}
+
+.mk-output p {
+  margin: 10px 0;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.mk-footer {
   margin-top: 20px;
-  padding-top: 16px;
-  border-top: 1px solid var(--border);
-  font-size: 0.95rem;
+  font-size: 11px;
+  color: #777;
+  text-align: center;
+}
+
+.mk-watermark {
+  display: block;
+  font-size: 10px;
+  opacity: .6;
+  margin-top: 4px;
+}
+
+@media (max-width: 768px) {
+  .mk-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media print {
+  .no-print { display: none !important; }
+  .mk-grid { grid-template-columns: 1fr; }
+  .mk-card { border: none; }
+  .mk-output::after {
+    content: "MrKlubíčko.cz";
+    position: absolute;
+    top: 40%;
+    left: 15%;
+    font-size: 64px;
+    opacity: .05;
+    transform: rotate(-20deg);
+    pointer-events: none;
+  }
 }
