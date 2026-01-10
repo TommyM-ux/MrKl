@@ -1,71 +1,34 @@
-(() => {
-  const byId = (id) => document.getElementById(id);
+document.getElementById("calculate").onclick = function () {
+  const gauge = Number(document.getElementById("gauge").value);
+  const width = Number(document.getElementById("width").value);
+  const length = Number(document.getElementById("length").value);
+  const result = document.getElementById("result");
 
-  const gaugeEl = byId("gauge");
-  const widthEl = byId("width");
-  const lengthEl = byId("length");
-  const btnEl = byId("calculate");
-  const resultEl = byId("result");
-
-  // Když něco nesedí, řekneme to přímo do stránky
-  const missing = [];
-  if (!gaugeEl) missing.push("#gauge");
-  if (!widthEl) missing.push("#width");
-  if (!lengthEl) missing.push("#length");
-  if (!btnEl) missing.push("#calculate");
-  if (!resultEl) missing.push("#result");
-
-  if (missing.length) {
-    // fallback: když není resultEl, aspoň log
-    console.error("Chybí prvky v HTML:", missing.join(", "));
-    if (resultEl) {
-      resultEl.innerHTML = `Chybí prvky v HTML: <strong>${missing.join(", ")}</strong>`;
-    }
+  if (!gauge || !width || !length) {
+    result.innerHTML = "Vyplň všechny hodnoty.";
     return;
   }
 
-  btnEl.addEventListener("click", () => {
-    const gauge = parseFloat(gaugeEl.value);   // oka / 10 cm
-    const width = parseFloat(widthEl.value);   // cm
-    const length = parseFloat(lengthEl.value); // cm
+  // ===== STEJNÉ CHOVÁNÍ JAKO PŘEDTÍM =====
+  // jen upravený výpočet
 
-    if (!gauge || !width || !length) {
-      resultEl.innerText = "Vyplň všechny hodnoty.";
-      return;
-    }
+  const stitchesPerCm = gauge / 10;
+  const bodyStitches = Math.round(stitchesPerCm * width);
 
-    // =========================
-    // VSAZENÉ RUKÁVY (set-in)
-    // =========================
+  // tělo: přední + zadní díl
+  const bodyArea = width * length * 2;
 
-    // hustota na 1 cm
-    const stitchesPerCm = gauge / 10;
+  // vsazené rukávy ~40 % těla
+  const sleeveArea = bodyArea * 0.40;
 
-    // oka na šířku těla (orientačně pro jeden díl / obvod podle toho, co zadáváš)
-    const bodyStitches = Math.round(stitchesPerCm * width);
+  let totalArea = bodyArea + sleeveArea;
 
-    // plocha těla: přední + zadní díl
-    const bodyArea = width * length * 2;
+  // spotřeba + rezerva
+  let yarn = totalArea * 0.028;
+  yarn = yarn * 1.12;
+  yarn = Math.round(yarn);
 
-    // rukávy u vsazené konstrukce: typicky ~40 % plochy těla (orientační)
-    const sleeveArea = bodyArea * 0.40;
-
-    // celkem
-    const totalArea = bodyArea + sleeveArea;
-
-    // koeficient spotřeby pro hladký základ (orientační)
-    let yarnEstimate = totalArea * 0.028;
-
-    // rezerva (uzly, vzorek, délky, chyba v měření)
-    yarnEstimate *= 1.12;
-
-    yarnEstimate = Math.round(yarnEstimate);
-
-    resultEl.innerHTML = `
-      <h2>Výsledek</h2>
-      <p><strong>Konstrukce:</strong> svetr s vsazeným rukávem</p>
-      <p><strong>Počet ok (na šířku):</strong> ${bodyStitches}</p>
-      <p><strong>Odhad spotřeby:</strong> cca ${yarnEstimate} g příze</p>
-    `;
-  });
-})();
+  result.innerHTML =
+    "<strong>Počet ok:</strong> " + bodyStitches + "<br>" +
+    "<strong>Odhad spotřeby:</strong> cca " + yarn + " g příze";
+};
