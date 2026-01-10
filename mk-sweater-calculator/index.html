@@ -7,13 +7,11 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<section class="mk-sweatercalc" id="mk-sweatercalc">
+<section class="mk-sweatercalc">
   <div class="mk-wrap">
-
     <header class="mk-hero no-print">
       <div class="mk-brand">
-        <img src="logo.svg" alt="Mr Klubíčko" class="mk-logo">
+        <div style="font-size: 40px;">🧶</div>
         <div>
           <h2>Kalkulačka střihu – všitý rukáv</h2>
           <p>KF klasický střih · EU proporční výpočet</p>
@@ -37,7 +35,6 @@
             <input id="finished" type="number" value="102">
           </div>
         </div>
-
         <div class="mk-row">
           <div class="mk-field">
             <label>Vzorek – oka / 10 cm</label>
@@ -48,7 +45,6 @@
             <input id="rows" type="number" step="0.1" value="30">
           </div>
         </div>
-
         <div class="mk-row">
           <div class="mk-field">
             <label>Rukáv nahoře (oka)</label>
@@ -56,10 +52,9 @@
           </div>
           <div class="mk-field">
             <label>Hloubka průramku (poměr)</label>
-            <input id="armPct" type="number" step="0.01" value="0.245">
+            <input id="armPct" type="number" step="0.001" value="0.245">
           </div>
         </div>
-
         <div class="mk-actions">
           <button type="button" class="mk-btn" id="calc">Spočítat návod</button>
           <button type="button" class="mk-btn mk-btn--ghost" id="printBtn" style="display:none" onclick="window.print()">Tisk návodu</button>
@@ -67,17 +62,11 @@
       </form>
 
       <div class="mk-card mk-output" id="out">
-        <div class="mk-muted">Zadej hodnoty a klikni na <strong>Spočítat</strong>.</div>
+        <div class="mk-muted">Zadejte hodnoty a klikněte na <strong>Spočítat</strong>.</div>
       </div>
     </div>
-
-    <footer class="mk-footer print-only">
-      © <strong>MrKlubíčko.cz</strong> · Kalkulačka střihu pro ruční pletení  
-      <span class="mk-watermark">Pouze pro osobní použití</span>
-    </footer>
   </div>
 </section>
-
 <script src="app.js"></script>
 </body>
 </html>
