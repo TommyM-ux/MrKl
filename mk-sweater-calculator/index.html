@@ -1,41 +1,83 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="utf-8">
-  <title>MK – Svetr s vsazeným rukávem</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="./style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulačka střihu – MrKlubíčko</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>Svetr s vsazeným rukávem</h1>
+<section class="mk-sweatercalc" id="mk-sweatercalc">
+  <div class="mk-wrap">
 
-<div class="calculator">
+    <header class="mk-hero no-print">
+      <div class="mk-brand">
+        <img src="logo.svg" alt="Mr Klubíčko" class="mk-logo">
+        <div>
+          <h2>Kalkulačka střihu – všitý rukáv</h2>
+          <p>KF klasický střih · EU proporční výpočet</p>
+        </div>
+      </div>
+    </header>
 
-  <form id="calculator">
+    <div class="mk-grid">
+      <form class="mk-card no-print" id="form">
+        <h3>Nastavení</h3>
+        <div class="mk-row">
+          <div class="mk-field">
+            <label>Režim výpočtu</label>
+            <select id="mode">
+              <option value="KF" selected>KF (klasický střih)</option>
+              <option value="EU">EU (podle těla)</option>
+            </select>
+          </div>
+          <div class="mk-field">
+            <label>Hotový obvod (cm)</label>
+            <input id="finished" type="number" value="102">
+          </div>
+        </div>
 
-    <label>
-      Hustota (oka na 10 cm)
-      <input type="number" id="gauge" value="20" step="0.1" required>
-    </label>
+        <div class="mk-row">
+          <div class="mk-field">
+            <label>Vzorek – oka / 10 cm</label>
+            <input id="sts" type="number" step="0.1" value="22">
+          </div>
+          <div class="mk-field">
+            <label>Vzorek – řady / 10 cm</label>
+            <input id="rows" type="number" step="0.1" value="30">
+          </div>
+        </div>
 
-    <label>
-      Šířka těla svetru (cm)
-      <input type="number" id="width" value="50" required>
-    </label>
+        <div class="mk-row">
+          <div class="mk-field">
+            <label>Rukáv nahoře (oka)</label>
+            <input id="sleeveTop" type="number" value="110">
+          </div>
+          <div class="mk-field">
+            <label>Hloubka průramku (poměr)</label>
+            <input id="armPct" type="number" step="0.01" value="0.245">
+          </div>
+        </div>
 
-    <label>
-      Délka těla svetru (cm)
-      <input type="number" id="length" value="60" required>
-    </label>
+        <div class="mk-actions">
+          <button type="button" class="mk-btn" id="calc">Spočítat návod</button>
+          <button type="button" class="mk-btn mk-btn--ghost" id="printBtn" style="display:none" onclick="window.print()">Tisk návodu</button>
+        </div>
+      </form>
 
-    <button type="button" id="calculate">Spočítat</button>
-  </form>
+      <div class="mk-card mk-output" id="out">
+        <div class="mk-muted">Zadej hodnoty a klikni na <strong>Spočítat</strong>.</div>
+      </div>
+    </div>
 
-  <div id="result"></div>
+    <footer class="mk-footer print-only">
+      © <strong>MrKlubíčko.cz</strong> · Kalkulačka střihu pro ruční pletení  
+      <span class="mk-watermark">Pouze pro osobní použití</span>
+    </footer>
+  </div>
+</section>
 
-</div>
-
-<script src="./app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
