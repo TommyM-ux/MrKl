@@ -143,6 +143,11 @@ document.addEventListener('DOMContentLoaded', () => {
         do požadovaných rozměrů.
       </p>
     `;
+    const printBtn = document.getElementById('printBtn');
+  if (printBtn) {
+    printBtn.style.display = 'inline-block';
+  }
+
   }
 
   /* =========================
@@ -170,13 +175,6 @@ if (printBtn) {
   printBtn.addEventListener('click', () => window.print());
 }
 
-generate(
-const printBtn = document.getElementById('printBtn');
-if (printBtn) {
-  printBtn.style.display = 'inline-block';
-}
-
-
-);
+generate();
   });
 
