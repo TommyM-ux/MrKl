@@ -45,7 +45,7 @@
 }
 
 .mk-field input, .mk-field select {
-  width: 100%;
+  width: 140px;
   padding: 10px;
   border-radius: 8px;
   border: 1px solid #ddd;
