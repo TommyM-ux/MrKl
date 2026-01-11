@@ -77,15 +77,28 @@
     </div>
   </div>
 
-  <!-- 5) RUKÁV -->
+  <!-- RUKÁV -->
+<div class="mk-field">
+  <label for="armCirc">Obvod paže (biceps, cm)</label>
+  <input id="armCirc" type="number" step="1" inputmode="numeric" value="36">
+  <p class="mk-help">
+    Obvod paže v nejširším místě (u bicepsu), měřený napevno.
+    Z této hodnoty se pomocí vzorku spočítá šířka rukávu.
+  </p>
+</div>
+
+<details class="mk-advanced">
+  <summary>Pokročilé – upravit šířku rukávu ručně</summary>
   <div class="mk-field">
-    <label for="sleeveTop">Rukáv nahoře (oka)</label>
-    <input id="sleeveTop" type="number" step="1" inputmode="numeric" value="110">
+    <label for="sleeveTopOverride">Rukáv nahoře – oka (override)</label>
+    <input id="sleeveTopOverride" type="number" step="1" inputmode="numeric">
     <p class="mk-help">
-      Počet ok v nejširší části rukávu (u bicepsu).
-      Spočítá se z obvodu paže a vzorku.
+      Volitelné. Pokud pole necháte prázdné, počet ok se spočítá automaticky
+      z obvodu paže a vzorku.
     </p>
   </div>
+</details>
+
 
   <div class="mk-actions">
     <button type="button" class="mk-btn" id="calcBtn">Spočítat návod</button>
