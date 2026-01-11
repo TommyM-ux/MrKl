@@ -87,8 +87,9 @@
 }
 
 .mk-logo {
-  height: 40px;
-}
+  height: 48px;   /* klidně 36–48 podle chuti */
+  width: auto;
+  }
 
 .mk-output h3 {
   margin-top: 0;
@@ -141,4 +142,5 @@
     transform: rotate(-20deg);
     pointer-events: none;
   }
+  
 }
