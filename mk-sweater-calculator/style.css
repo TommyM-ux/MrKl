@@ -44,7 +44,7 @@
   display: block;
 }
 
-.mk-field input, .mk-field select {
+.mk-field input {
   width: 90%;
   max-width: 80px;
   padding: 10px;
@@ -52,7 +52,9 @@
   border: 1px solid #ddd;
   box-sizing: border-box;
 }
-
+.mk-field select {
+  max-width: 220px;
+}
 .mk-btn {
   background: var(--accent);
   color: #fff;
@@ -108,7 +110,7 @@
 .mk-watermark {
   display: block;
   font-size: 10px;
-  opacity: .6;
+  opacity: .7;
   margin-top: 4px;
 }
 .mk-help{
