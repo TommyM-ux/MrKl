@@ -158,12 +158,16 @@ document.addEventListener('DOMContentLoaded', () => {
   'armRatio',
   'sleeveTopOverride'
 ].forEach(id => {
-  const el = $(id);
+  const el = document.getElementById(id);
   if (el) el.addEventListener('input', generate);
 });
 
+const calcBtn = document.getElementById('calcBtn');
+if (calcBtn) calcBtn.addEventListener('click', generate);
+
+const printBtn = document.getElementById('printBtn');
+if (printBtn) {
+  printBtn.addEventListener('click', () => window.print());
+}
+
 generate();
-
-
-  generate();
-});
