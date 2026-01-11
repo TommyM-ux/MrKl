@@ -170,6 +170,13 @@ if (printBtn) {
   printBtn.addEventListener('click', () => window.print());
 }
 
-generate();
+generate(
+const printBtn = document.getElementById('printBtn');
+if (printBtn) {
+  printBtn.style.display = 'inline-block';
+}
+
+
+);
   });
 
