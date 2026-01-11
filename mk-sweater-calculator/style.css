@@ -82,9 +82,16 @@
 
 .mk-brand {
   display: flex;
-  gap: 14px;
+  flex-direction: column;
   align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+
+  max-width: 420px;     /* 👈 omezí šířku bloku */
+  margin-left: auto;
+  margin-right: auto;
 }
+
 
 .mk-logo {
   height: 48px;   /* klidně 36–48 podle chuti */
