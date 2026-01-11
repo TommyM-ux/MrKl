@@ -150,17 +150,20 @@ document.addEventListener('DOMContentLoaded', () => {
   ========================== */
 
   [
-    'chest',
-    'fit',
-    'sts',
-    'rows',
-    'armCirc',
-    'armRatio',
-    'sleeveTopOverride'
-  ].forEach(id => {
-    const el = $(id);
-    if (el) el.addEventListener('input', generate);
-  });
+  'chest',
+  'fit',
+  'sts',
+  'rows',
+  'armCirc',
+  'armRatio',
+  'sleeveTopOverride'
+].forEach(id => {
+  const el = $(id);
+  if (el) el.addEventListener('input', generate);
+});
+
+generate();
+
 
   generate();
 });
