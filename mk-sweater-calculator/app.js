@@ -126,17 +126,6 @@ const capDecSteps = Math.floor(stsToDecrease / 2); // kolikrát ubereme 1 oko na
   <li>Nakonec zbývajících <strong>${targetTopSts} ok</strong> uzavřete najednou.</li>
 </ul>
 
-// <h4>Tvarování průramku</h4>
-// <p>
-//  Ve výšce, kde má začít průramek, uzavřete na začátku následujících dvou řad
-//  <strong>${armholeBO} oka</strong>.
-// </p>
-// <p>
-//  Poté tvarujte průramek ujímáním ok (celkem ubyde <strong>${armholeDrop} ok</strong>
-//  na každém dílu). Průramek pleťte do celkové výšky
-//  <strong>${armDepthCm} cm</strong> (≈ ${armRows} řad).
-// </p>
-
 
       <p>
         Po dokončení tvarování průramku vám na jehlici zůstane
@@ -170,7 +159,17 @@ const capDecSteps = Math.floor(stsToDecrease / 2); // kolikrát ubereme 1 oko na
   }
 
   }
-
+/* <h4>Tvarování průramku</h4>
+<p>
+  Ve výšce, kde má začít průramek, uzavřete na začátku následujících dvou řad
+  <strong>${armholeBO} oka</strong>.
+</p>
+<p>
+  Poté tvarujte průramek ujímáním ok (celkem ubyde <strong>${armholeDrop} ok</strong>
+  na každém dílu). Průramek pleťte do celkové výšky
+  <strong>${armDepthCm} cm</strong> (≈ ${armRows} řad).
+</p>
+*/
   /* =========================
      EVENTY
   ========================== */
