@@ -96,7 +96,17 @@ const capDecSteps = Math.floor(stsToDecrease / 2); // kolikrát ubereme 1 oko na
 
     out.innerHTML = `
       <h3>Návod k pletení – svetr s všitým rukávem</h3>
-
+<div style="text-align: center; margin: 20px 0; background: #fff; padding: 10px; border: 1px solid #eee; border-radius: 10px;">
+                    <svg viewBox="0 0 400 220" width="100%" style="max-width: 400px;">
+                        <rect x="150" y="100" width="100" height="100" fill="none" stroke="#ee6e62" stroke-width="2" />
+                        <path d="M150 100 L100 150 L120 165 L155 125" fill="none" stroke="#ee6e62" stroke-width="2" />
+                        <path d="M250 100 L300 150 L280 165 L245 125" fill="none" stroke="#ee6e62" stroke-width="2" />
+                        <text x="200" y="215" font-size="14" text-anchor="middle" font-weight="bold">${pieceSts} ok</text>
+                        <text x="260" y="150" font-size="12" fill="#666" transform="rotate(-90 260 150)">${bodyLenCm} cm</text>
+                        <text x="200" y="90" font-size="12" text-anchor="middle" fill="#ee6e62">${armRows} řad</text>
+                        <text x="90" y="175" font-size="12" text-anchor="middle">${sleeveTop} ok</text>
+                    </svg>
+                </div>
       <h4>Základní přehled</h4>
       <ul>
         <li><strong>Vzorek:</strong> ${sts} ok × ${rows} řad na 10 cm</li>
