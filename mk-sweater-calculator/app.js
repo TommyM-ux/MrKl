@@ -91,31 +91,23 @@ document.addEventListener('DOMContentLoaded', () => {
       </ul>
 
       <h4>Přední a zadní díl</h4>
-      <p>
-        Na přední i zadní díl nahodíte <strong>${pieceSts} ok</strong>.
-        Upletete spodní lem podle vlastních zvyklostí
-        a pokračujete rovně v hladkém žerzeji.
-      </p>
+<p>
+  Na přední i zadní díl nahodíte <strong>${pieceSts} ok</strong>. 
+  Upletete spodní lem dle vlastních zvyklostí a pokračujete rovně do požadované
+  délky k podpaží (obvykle 40–45 cm).
+</p>
 
-      <p>
-        Pleťte rovně do výšky cca <strong>${armDepthCm} cm</strong>,
-        což odpovídá přibližně <strong>${armRows} řadám</strong>.
-        V této výšce začíná tvarování průramku.
-      </p>
+<h4>Tvarování průramku</h4>
+<p>
+  Ve výšce, kde má začít průramek, uzavřete na začátku následujících dvou řad
+  <strong>${armholeBO} oka</strong>.
+</p>
+<p>
+  Poté tvarujte průramek ujímáním ok (celkem ubyde <strong>${armholeDrop} ok</strong>
+  na každém dílu). Průramek pleťte do celkové výšky
+  <strong>${armDepthCm} cm</strong> (≈ ${armRows} řad).
+</p>
 
-      <h4>Tvarování průramku</h4>
-      <p>
-        Na začátku následujících dvou řad uzavřete vždy
-        <strong>${armholeBO} oka</strong>.
-      </p>
-
-      <p>
-        Poté <strong>${armholeDec}×</strong> opakujte:
-      </p>
-      <ul>
-        <li>1 řadu upletete rovně</li>
-        <li>v následující řadě ujmete 1 oko na každém konci jehlice</li>
-      </ul>
 
       <p>
         Po dokončení tvarování průramku vám na jehlici zůstane
