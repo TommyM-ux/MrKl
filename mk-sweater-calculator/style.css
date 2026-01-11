@@ -53,7 +53,7 @@
   box-sizing: border-box;
 }
 .mk-field select {
-  max-width: 220px;
+  max-width: 320px;
 }
 .mk-btn {
   background: var(--accent);
