@@ -122,13 +122,13 @@ const capDecSteps = Math.floor(stsToDecrease / 2); // kolikrát ubereme 1 oko na
   délky k podpaží (obvykle 40–45 cm).
 </p>
 
-<h4>Rukáv a rukávová koule</h4>
+<h4>Rukáv a rukávová hlavice</h4>
 <p>
   Rukáv pletete od manžety. V nejširším místě (podpaží) budete mít 
   <strong>${sleeveTop} ok</strong>.
 </p>
 
-<p><strong>Tvarování rukávové koule:</strong></p>
+<p><strong>Tvarování rukávová hlavice:</strong></p>
 <ul>
   <li>Na začátku následujících 2 řad uzavřete <strong>${capBO} oka</strong> (zbývá ${currentCapSts} ok).</li>
   <li>Poté uplatněte <strong>${capDecSteps}×</strong> toto ujímání: 
