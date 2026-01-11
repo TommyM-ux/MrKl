@@ -21,21 +21,31 @@
 
     <div class="mk-grid">
       <form class="mk-card no-print" id="form">
-        <h3>Nastavení</h3>
-        <div class="mk-row">
-          <div class="mk-field">
-            <label>Režim výpočtu</label>
-            <select id="mode">
-<option value="KF" selected>Klasický (KF – volnější střih)</option>
-    <option value="EU">Úzký (EU – střih na tělo)</option>
-            </select>
-          </div>
-           <p class="mk-help">
-    Volba střihu ovlivňuje hlavně <strong>hloubku průramku</strong>, <strong>šířku rukávu nahoře</strong>
-    a <strong>prostor v ramenou</strong>. Nejde o jiný postup pletení, jen o jiné proporce.
-  </p>
-            </div>
-            <div class="mk-field">
+<h3>Nastavení</h3>
+
+<div class="mk-row">
+  <div class="mk-field">
+    <label for="mode">Režim výpočtu</label>
+    <select id="mode">
+      <option value="KF" selected>Klasický (KF – volnější střih)</option>
+      <option value="EU">Úzký (EU – střih na tělo)</option>
+    </select>
+  </div>
+
+  <div class="mk-field">
+    <label for="armRatio" title="Poměr z hotového obvodu. Příklad: 0,245 × 100 cm = 24,5 cm hloubka průramku.">
+      Hloubka průramku (poměr)
+    </label>
+    <input id="armRatio" type="number" step="0.001" inputmode="decimal" value="0.245">
+    <p class="mk-help">
+      Určuje <strong>výšku průramku</strong> jako podíl z <strong>hotového obvodu svetru</strong>.
+      Ovlivňuje <strong>počet řad průramku</strong> a tím i pohodlí v ramenou. <strong>Nemění šířku svetru.</strong><br>
+      Příklad: 0,245 × 100 cm = 24,5 cm. Doporučené rozmezí: <strong>0,22–0,27</strong> (běžně <strong>0,24–0,255</strong>).
+    </p>
+  </div>
+</div>
+
+<div class="mk-field">
   <label for="finished">Obvod hrudníku – hotový svetr (cm)</label>
   <input id="finished" type="number" step="1" inputmode="numeric" value="102">
   <p class="mk-help">
@@ -44,31 +54,32 @@
   </p>
 </div>
 
-        <div class="mk-row">
-          <div class="mk-field">
-            <label>Vzorek – oka / 10 cm</label>
-            <input id="sts" type="number" step="1" inputmode="numeric" value="22">
+<div class="mk-row">
+  <div class="mk-field">
+    <label for="sts">Vzorek – oka / 10 cm</label>
+    <input id="sts" type="number" step="1" inputmode="numeric" value="22">
+  </div>
 
-          </div>
-          <div class="mk-field">
-            <label>Vzorek – řady / 10 cm</label>
-            <input id="rows" type="number" step="1" inputmode="numeric" value="30">
-
-          </div>
-        </div>
-        <div class="mk-row">
-          <p class="mk-help">
-  Počet ok v nejširší části rukávu (u bicepsu / horní části paže) těsně před hlavicí.
-  Hodnotu upravte podle vlastního vzorku:
-  <strong>obvod rukávu v cm × (počet ok / 10 cm) = oka rukávu nahoře</strong>.
-</p>
+  <div class="mk-field">
+    <label for="rows">Vzorek – řady / 10 cm</label>
+    <input id="rows" type="number" step="1" inputmode="numeric" value="30">
+  </div>
 </div>
 
-        </div>
-        <div class="mk-actions">
-          <button type="button" class="mk-btn" id="calc">Spočítat návod</button>
-          <button type="button" class="mk-btn mk-btn--ghost" id="printBtn" style="display:none" onclick="window.print()">Tisk návodu</button>
-        </div>
+<div class="mk-field">
+  <label for="sleeveTop">Rukáv nahoře (oka)</label>
+  <input id="sleeveTop" type="number" step="1" inputmode="numeric" value="110">
+  <p class="mk-help">
+    Počet ok v nejširší části rukávu (u bicepsu) těsně před hlavicí.
+    Spočítáte z obvodu paže: <strong>obvod rukávu v cm × (oka / 10 cm) = oka rukávu nahoře</strong>.
+  </p>
+</div>
+
+<div class="mk-actions">
+  <button type="button" class="mk-btn" id="calc">Spočítat návod</button>
+  <button type="button" class="mk-btn mk-btn--ghost" id="printBtn" style="display:none">Tisk návodu</button>
+</div>
+
       </form>
 
       <div class="mk-card mk-output" id="out">
