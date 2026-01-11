@@ -27,7 +27,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const sts = readInt('sts', 22);
     const rows = readInt('rows', 30);
-    const sleeveTop = EVEN(readInt('sleeveTop', 110));
+    // === RUKÁV NAHOŘE (biceps) ===
+const armCirc = readInt('armCirc', 36); // cm
+const sleeveOverride = readInt('sleeveTopOverride', null);
+
+let sleeveTop;
+if (sleeveOverride && sleeveOverride > 0) {
+  sleeveTop = EVEN(sleeveOverride);
+} else {
+  sleeveTop = EVEN(armCirc * (sts / 10));
+}
+
     const armRatio = clamp(readFloat('armRatio', 0.245), 0.18, 0.30);
 
     // zobraz hotový obvod
