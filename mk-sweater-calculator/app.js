@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const armholeBO    = 3;     // pevná KF logika
     const armholeDrop  = 12;
     const armholeDec   = Math.max(0, Math.floor((armholeDrop - armholeBO * 2) / 2));
-    const bodyAfterArm = pieceSts - armholeDrop;
+    const bodyAfterArm = EVEN(pieceSts - armholeDrop);
 
     /* === 4) RUKÁV === */
 
@@ -75,6 +75,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const sleeveLenCm = Math.round(finished * 0.45);
 
+   /* === 4b) TVAROVÁNÍ RUKÁVOVÉ KOULE === */
+// Rukávová koule by měla mít cca stejnou výšku jako průramek, 
+// ale končíme dřív, aby nebyla špičatá.
+const capRows = Math.round(armRows * 0.9); 
+const capBO = armholeBO; // Začínáme stejným uzavřením jako u těla
+
+// Počáteční uzavření na obou stranách
+let currentCapSts = sleeveTop - (capBO * 2);
+
+// Výpočet postupného ujímání (každá 2. řada)
+// Cílem je nechat nahoře cca 25-30 % ok pro ploché uzavření
+const targetTopSts = EVEN(sleeveTop * 0.25);
+const stsToDecrease = currentCapSts - targetTopSts;
+const capDecSteps = Math.floor(stsToDecrease / 2); // kolikrát ubereme 1 oko na každé straně
+    
     /* === 5) VÝSTUP === */
 
     const out = $('out');
@@ -97,16 +112,30 @@ document.addEventListener('DOMContentLoaded', () => {
   délky k podpaží (obvykle 40–45 cm).
 </p>
 
-<h4>Tvarování průramku</h4>
+<h4>Rukáv a rukávová koule</h4>
 <p>
-  Ve výšce, kde má začít průramek, uzavřete na začátku následujících dvou řad
-  <strong>${armholeBO} oka</strong>.
+  Rukáv pletete od manžety. V nejširším místě (podpaží) budete mít 
+  <strong>${sleeveTop} ok</strong>.
 </p>
-<p>
-  Poté tvarujte průramek ujímáním ok (celkem ubyde <strong>${armholeDrop} ok</strong>
-  na každém dílu). Průramek pleťte do celkové výšky
-  <strong>${armDepthCm} cm</strong> (≈ ${armRows} řad).
-</p>
+
+<p><strong>Tvarování rukávové koule:</strong></p>
+<ul>
+  <li>Na začátku následujících 2 řad uzavřete <strong>${capBO} oka</strong> (zbývá ${currentCapSts} ok).</li>
+  <li>Poté uplatněte <strong>${capDecSteps}×</strong> toto ujímání: 
+      v každé 2. řadě (lícové) ujměte 1 oko na začátku a 1 oko na konci jehlice.</li>
+  <li>Nakonec zbývajících <strong>${targetTopSts} ok</strong> uzavřete najednou.</li>
+</ul>
+
+// <h4>Tvarování průramku</h4>
+// <p>
+//  Ve výšce, kde má začít průramek, uzavřete na začátku následujících dvou řad
+//  <strong>${armholeBO} oka</strong>.
+// </p>
+// <p>
+//  Poté tvarujte průramek ujímáním ok (celkem ubyde <strong>${armholeDrop} ok</strong>
+//  na každém dílu). Průramek pleťte do celkové výšky
+//  <strong>${armDepthCm} cm</strong> (≈ ${armRows} řad).
+// </p>
 
 
       <p>
