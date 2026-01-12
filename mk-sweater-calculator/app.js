@@ -107,6 +107,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const printBtn = $('printBtn');
     if (printBtn) printBtn.style.display = 'inline-block';
+  
+  // === POPISKY DO OBRÁZKU ===
+const lblBody  = document.getElementById('lblBody');
+const lblArm   = document.getElementById('lblArm');
+const lblDepth = document.getElementById('lblDepth');
+
+if (lblBody) {
+  lblBody.textContent = `${pieceSts} ok`;
+}
+
+if (lblArm) {
+  lblArm.textContent = `${sleeveSts} ok`;
+}
+
+if (lblDepth) {
+  lblDepth.textContent = `${armRows} řad`;
+}
+
   }
 
   ['chest', 'fit', 'sts', 'rows', 'armCirc', 'armRatio', 'sleeveTopOverride'].forEach(id => {
