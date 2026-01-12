@@ -53,26 +53,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const out = $('out');
     if (!out) return;
 
+    // diagram labels
+document.getElementById('lblBody').textContent =
+  `${pieceSts} ok`;
+
+document.getElementById('lblArm').textContent =
+  `${sleeveTopSts} ok`;
+
+document.getElementById('lblDepth').textContent =
+  `${armRows} řad`;
+
     out.innerHTML = `
       <h3>Návod k pletení – svetr s všitým rukávem</h3>
 
-     <div style="text-align: center; margin: 20px 0; background: #fff; padding: 20px; border: 1px solid #eee; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
-          <svg viewBox="0 0 400 240" width="100%" style="max-width: 450px;">
-              <path d="M140,210 L260,210 L260,110 Q260,90 240,85 L240,65 Q240,60 235,60 L165,60 Q160,60 160,65 L160,85 Q140,90 140,110 Z" 
-                    fill="#fefefe" stroke="#ee6e62" stroke-width="2.5" />
-              
-              <path d="M140,110 Q140,90 155,95 L85,145 L100,165 L160,125" 
-                    fill="#fefefe" stroke="#ee6e62" stroke-width="2.5" stroke-linejoin="round" />
-              
-              <path d="M260,110 Q260,90 245,95 L315,145 L300,165 L240,125" 
-                    fill="#fefefe" stroke="#ee6e62" stroke-width="2.5" stroke-linejoin="round" />
-
-              <text x="200" y="230" font-size="14" text-anchor="middle" font-weight="bold" fill="#333">${pieceSts} ok</text>
-              <text x="280" y="160" font-size="12" fill="#888" transform="rotate(-90 280 160)">${bodyLenCm} cm</text>
-              <text x="200" y="110" font-size="13" fill="#ee6e62" font-weight="bold" text-anchor="middle">${armRows} řad</text>
-              <text x="80" y="180" font-size="12" text-anchor="middle" fill="#333">${sleeveTop} ok</text>
-          </svg>
-      </div>
+    
 
       <p>
         Tento návod je vypočten pro hotový obvod svetru 
