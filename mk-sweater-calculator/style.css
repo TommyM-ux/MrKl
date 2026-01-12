@@ -142,6 +142,50 @@
 }
 .mk-help strong{ color:var(--text); }
 
+.mk-diagram {
+  position: relative;
+  max-width: 420px;
+  margin: 0 auto 20px;
+}
+
+.mk-diagram-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* společné vlastnosti čísel */
+.mk-label {
+  position: absolute;
+  background: rgba(255,255,255,0.85);
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #ee6e62;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+/* KONKRÉTNÍ POZICE – TADY SI HRAJEŠ */
+.mk-label--body {
+  bottom: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.mk-label--arm {
+  top: 38%;
+  left: 8%;
+}
+
+.mk-label--depth {
+  top: 32%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+
+
 @media (max-width: 768px) {
   .mk-grid {
     grid-template-columns: 1fr;
