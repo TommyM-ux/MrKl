@@ -144,15 +144,17 @@
 
 .mk-diagram {
   position: relative;
-  max-width: 420px;
-  margin: 0 auto 20px;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto 24px;
 }
 
 .mk-diagram-img {
+  display: block;
   width: 100%;
   height: auto;
-  display: block;
 }
+
 
 /* společné vlastnosti čísel */
 .mk-label {
