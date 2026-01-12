@@ -53,15 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const out = $('out');
     if (!out) return;
 
-    // diagram labels
-document.getElementById('lblBody').textContent =
-  `${pieceSts} ok`;
-
-document.getElementById('lblArm').textContent =
-  `${sleeveTopSts} ok`;
-
-document.getElementById('lblDepth').textContent =
-  `${armRows} řad`;
+ 
 
     out.innerHTML = `
       <h3>Návod k pletení – svetr s všitým rukávem</h3>
