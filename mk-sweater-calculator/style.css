@@ -147,36 +147,40 @@
   position: relative;
   max-width: 420px;
   margin: 0 auto 24px;
-  display: inline-block; /* 👈 Toto zajistí, že obal bude jen tak široký jako obrázek */
+  /* 👇 KLÍČOVÁ ZMĚNA: box bude mít jen šířku obrázku, nebude se roztahovat */
+  width: fit-content; 
+  display: block;
 }
 
 .mk-label {
   position: absolute;
-  background: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.95);
+  border: 1px solid var(--accent);
   border-radius: 8px;
-  padding: 4px 8px;
+  padding: 4px 10px;
   font-size: 13px;
   font-weight: 700;
-  color: #ee6e62;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  /* 👈 Přidáme tohle pro lepší centrování */
+  color: var(--accent);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  /* 👇 Toto zajistí, že souřadnice (left/top) určují STŘED bubliny */
   transform: translate(-50%, -50%); 
   white-space: nowrap;
+  z-index: 10;
 }
 
 /* Upravené pozice, aby seděly na tvůj nákres */
 .mk-label--body {
-  bottom: 12%; 
+  bottom: 15%; /* U spodního lemu */
   left: 50%;
 }
 
 .mk-label--arm {
-  top: 40%;
-  left: 20%;
+  top: 42%;    /* Na levém rukávu */
+  left: 18%;   /* Posunuto více k rukávu */
 }
 
 .mk-label--depth {
-  top: 28%;
+  top: 35%;    /* V oblasti průramku */
   left: 50%;
 }
 
