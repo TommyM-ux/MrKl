@@ -144,15 +144,14 @@
 
 .mk-diagram {
   position: relative;
-  width: 100%;
-  max-width: 520px;
+  max-width: 420px;   /* ← klíčové */
   margin: 0 auto 24px;
 }
 
 .mk-diagram-img {
-  display: block;
   width: 100%;
   height: auto;
+  display: block;
 }
 
 
