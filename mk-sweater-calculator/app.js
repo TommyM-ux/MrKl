@@ -103,6 +103,11 @@ document.addEventListener('DOMContentLoaded', () => {
         a uzavřete boční švy. Svetr vyperte a vypněte 
         do požadovaných rozměrů.
       </p>
+
+      <p></p>
+      <p>
+      © Práva vyhrazena - MistrKlubíčko.cz
+      </p>
       `;
     }
 
