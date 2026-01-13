@@ -147,12 +147,12 @@
   position: relative;
   max-width: 420px;
   margin: 0 auto 24px;
-  width: 100%; /* Necháme ho roztáhnout na max-width */
-  line-height: 0; /* Odstraní drobnou mezeru pod obrázkem */
+  width: fit-content; /* Zásadní: box se smrští na šířku obrázku */
+  line-height: 0;
 }
 
 .mk-diagram-img {
-  width: 100%; /* Obrázek vyplní kontejner */
+  max-width: 100%;
   height: auto;
   display: block;
 }
@@ -167,26 +167,26 @@
   font-weight: 700;
   color: var(--accent);
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  /* 👇 Toto zajistí, že souřadnice (left/top) určují STŘED bubliny */
-  transform: translate(-50%, -50%); 
+  transform: translate(-50%, -50%); /* Střed bubliny je na souřadnici */
   white-space: nowrap;
   z-index: 10;
+  line-height: 1.2;
 }
 
-/* Upravené pozice, aby seděly na tvůj nákres */
+/* Přesné souřadnice na tělo svetru */
 .mk-label--body {
-  bottom: 20%; 
+  top: 90%; /* Dole u lemu */
   left: 50%;
 }
 
 .mk-label--arm {
-  top: 45%;    
-  left: 15%;   /* Pozice na levém rukávu */
+  top: 45%; /* Na rukávu */
+  left: 20%;
 }
 
 .mk-label--depth {
-  top: 40%;    
-  left: 50%;   /* Uprostřed mezi průramky */
+  top: 35%; /* Uprostřed průramku */
+  left: 50%;
 }
 
 
