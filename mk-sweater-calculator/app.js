@@ -55,8 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
  
 
-   const outText = $('outText');
-  outText.innerHTML = `
+   const out = $('out');
+  out.innerHTML = `
       <h3>Návod k pletení – svetr s všitým rukávem</h3>
 
     
