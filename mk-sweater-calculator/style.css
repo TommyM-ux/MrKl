@@ -142,10 +142,13 @@
 }
 .mk-help strong{ color:var(--text); }
 
+/* Kontejner pro obrázek a popisky */
 .mk-diagram {
   position: relative;
-  max-width: 420px;   /* ← klíčové */
+  max-width: 420px;
   margin: 0 auto 24px;
+  display: inline-block; /* Zajistí, že kontejner bude mít přesně velikost obrázku */
+  width: 100%;
 }
 
 .mk-diagram-img {
@@ -155,32 +158,39 @@
 }
 
 
-/* společné vlastnosti čísel */
+/* Společný styl pro bubliny */
 .mk-label {
   position: absolute;
-  background: rgba(255,255,255,0.85);
-  border-radius: 8px;
-  padding: 4px 8px;
+  background: rgba(255, 255, 255, 0.9); /* O něco méně průhledné pro lepší čitelnost */
+  border-radius: 6px;
+  padding: 2px 8px;
   font-size: 13px;
   font-weight: 700;
   color: #ee6e62;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  white-space: nowrap;
+  pointer-events: none; /* Bubliny nebudou překážet klikání */
+  border: 1px solid #ee6e62;
 }
 
-/* KONKRÉTNÍ POZICE – TADY SI HRAJEŠ */
+/* KONKRÉTNÍ POZICE NA OBRÁZKU */
+
+/* Šířka těla – uprostřed dole nad lemem */
 .mk-label--body {
-  bottom: 18%;
+  bottom: 12%; 
   left: 50%;
   transform: translateX(-50%);
 }
 
+/* Šířka rukávu – na levém rukávu */
 .mk-label--arm {
-  top: 38%;
-  left: 8%;
+  top: 45%;
+  left: 10%;
 }
 
+/* Hloubka průramku – uprostřed hrudníku */
 .mk-label--depth {
-  top: 32%;
+  top: 25%;
   left: 50%;
   transform: translateX(-50%);
 }
