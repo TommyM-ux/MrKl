@@ -61,41 +61,48 @@ document.addEventListener('DOMContentLoaded', () => {
       out.innerHTML = `
         <h3>Návod k pletení – svetr s všitým rukávem</h3>
         <p>
-          Tento návod je vypočten pro hotový obvod svetru 
-          <strong>${finished} cm</strong> (včetně volnosti ${ease} cm) 
-          při zkušebním vzorku ${sts} ok a ${rows} řad na 10 cm.
-        </p>
+        Tento návod je vypočten pro hotový obvod svetru 
+        <strong>${finished} cm</strong> (včetně volnosti ${ease} cm) 
+        při zkušebním vzorku ${sts} ok a ${rows} řad na 10 cm.
+      </p>
 
-        <h4>Přední a zadní díl</h4>
-        <p>
-          Na přední i zadní díl nahodíte <strong>${pieceSts} ok</strong>. 
-          Upletete spodní lem a pokračujete rovně do délky k podpaží (cca ${bodyLenCm} cm).
-        </p>
+      <h4>Přední a zadní díl</h4>
+      <p>
+        Na přední i zadní díl nahodíte <strong>${pieceSts} ok</strong>. 
+        Upletete spodní lem dle vlastních zvyklostí a pokračujete rovně do požadované 
+        délky k podpaží (obvykle 40–45 cm).
+      </p>
 
-        <h4>Tvarování průramku</h4>
-        <p>
-          Ve výšce průramku uzavřete na začátku následujících dvou řad 
-          <strong>${armholeBO} oka</strong>.
-        </p>
-        <p>
-          Poté tvarujte průramek ujímáním ok (celkem ubyde <strong>${armholeDrop} ok</strong> 
-          na každém dílu). Průramek pleťte do celkové výšky 
-          <strong>${armDepthCm} cm</strong> (tj. ${armRows} řad). 
-          Po dokončení vám zůstane <strong>${bodyAfterArm} ok</strong>.
-        </p>
+      <h4>Tvarování průramku</h4>
+      <p>
+        Ve výšce, kde má začít průramek, uzavřete na začátku následujících dvou řad 
+        <strong>${armholeBO} oka</strong>.
+      </p>
+      <p>
+        Poté tvarujte průramek ujímáním ok (celkem ubyde <strong>${armholeDrop} ok</strong> 
+        na každém dílu). Průramek pleťte do celkové výšky 
+        <strong>${armDepthCm} cm</strong> (cca ${armRows} řad). 
+        Po dokončení tvarování vám zůstane <strong>${bodyAfterArm} ok</strong>.
+      </p>
 
-        <h4>Rukáv</h4>
-        <p>
-          V nejširší části rukávu (u paže) budete mít 
-          <strong>${sleeveTop} ok</strong>. 
-          K této šířce přidávejte oka rovnoměrně od manžety 
-          až do délky přibližně <strong>${sleeveLenCm} cm</strong>.
-        </p>
+      <h4>Rukáv</h4>
+      <p>
+        Rukávy pletete od manžety směrem nahoru podle naměřeného obvodu paže 
+        <strong>${armCirc} cm</strong> a zvoleného vzorku.
+      </p>
+      <p>
+        V nejširší části rukávu budete mít 
+        <strong>${sleeveTop} ok</strong>. 
+        K této šířce přidávejte oka rovnoměrně 
+        až do délky přibližně <strong>${sleeveLenCm} cm</strong>.
+      </p>
 
-        <h4>Dokončení</h4>
-        <p>
-          Sešijte ramena, všijte rukávy a uzavřete boční švy. Svetr vyperte a vypněte.
-        </p>
+      <h4>Dokončení</h4>
+      <p>
+        Sešijte ramenní švy, všijte rukávy do průramků 
+        a uzavřete boční švy. Svetr vyperte a vypněte 
+        do požadovaných rozměrů.
+      </p>
       `;
     }
 
