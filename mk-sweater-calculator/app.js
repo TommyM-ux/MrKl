@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sleeveLenCm = Math.round(finished * 0.45);
 
     const out = $('out');
-    if (!out) return;
+    if (!out) ;
 
  
   out.innerHTML = `
@@ -107,10 +107,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const printBtn = $('printBtn');
     if (printBtn) printBtn.style.display = 'inline-block';
   
-// === POPISKY DO OBRÁZKU ===
-const lblBody  = document.getElementById('lblBody');
-const lblArm   = document.getElementById('lblArm');
-const lblDepth = document.getElementById('lblDepth');
+// POPISKY DO OBRÁZKU - Tady nesmí být sleeveSts!
+    if ($('lblBody'))  $('lblBody').textContent  = `${pieceSts} ok`;
+    if ($('lblArm'))   $('lblArm').textContent   = `${sleeveTop} ok`;
+    if ($('lblDepth')) $('lblDepth').textContent = `${armRows} řad`;
+  }
 
 if (lblBody) {
   lblBody.textContent = `${pieceSts} ok`;
@@ -127,7 +128,7 @@ if (lblDepth) {
 
   }
 
-  ['chest', 'fit', 'sts', 'rows', 'armCirc', 'armRatio', 'sleeveTopOverride'].forEach(id => {
+ ['chest', 'fit', 'sts', 'rows', 'armCirc', 'sleeveTopOverride'].forEach(id => {
     const el = $(id);
     if (el) el.addEventListener('input', generate);
   });
