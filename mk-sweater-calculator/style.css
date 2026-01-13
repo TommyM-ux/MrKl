@@ -159,17 +159,35 @@
 
 .mk-label {
   position: absolute;
-  /* Transform zajistí, že souřadnice určují STŘED bubliny, ne roh */
-  transform: translate(-50%, -50%); 
-  background: white;
-  border: 1px solid var(--accent);
-  padding: 4px 10px;
-  border-radius: 8px;
-  font-weight: bold;
+  /* Jemný přechod pozadí pro větší hloubku */
+  background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
+  
+  /* Výraznější barva ohraničení */
+  border: 2px solid var(--accent);
+  border-radius: 12px;
+  
+  /* ZVĚTŠENÍ: Větší výplň (padding) a písmo */
+  padding: 8px 16px; 
+  font-size: 16px; 
+  font-weight: 800;
   color: var(--accent);
+  
+  /* STÍN: Výraznější, aby bublina „levitovala“ nad svetrem */
+  box-shadow: 0 4px 12px rgba(238, 110, 98, 0.25);
+  
+  /* Animace při najetí myší (bonus) */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+  transform: translate(-50%, -50%); 
   white-space: nowrap;
-  font-size: 13px;
   z-index: 10;
+  line-height: 1.2;
+}
+
+/* Jemný efekt, když na bublinu najedeš myší */
+.mk-label:hover {
+  transform: translate(-50%, -55%) scale(1.05);
+  box-shadow: 0 6px 15px rgba(238, 110, 98, 0.35);
 }
 
 /* Teď už budou tyhle % sedět přímo na nákresu */
