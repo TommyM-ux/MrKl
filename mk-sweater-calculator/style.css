@@ -146,8 +146,8 @@
 .mk-diagram {
   position: relative;
   max-width: 420px;
-  margin: 0 auto 24px;
-  display: block;
+  margin: 20px auto;
+  display: block; /* Důležité pro centrování */
 }
 
 .mk-diagram-img {
@@ -156,35 +156,23 @@
   display: block;
 }
 
-/* Společný styl bublin */
 .mk-label {
   position: absolute;
-  background: rgba(255, 255, 255, 0.9);
+  background: white;
   border: 1px solid var(--accent);
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 4px 8px;
   font-size: 13px;
-  font-weight: 700;
+  font-weight: bold;
   color: var(--accent);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  transform: translate(-50%, -50%); /* Centrování na bod */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transform: translate(-50%, -50%); /* Centrování bubliny na bod */
 }
 
-/* Pozice pro tvůj obrázek svetru */
-.mk-label--body {
-  bottom: 10%; /* U spodního lemu */
-  left: 50%;
-}
-
-.mk-label--arm {
-  top: 45%;    /* Na rukávu */
-  left: 20%;
-}
-
-.mk-label--depth {
-  top: 35%;    /* V oblasti hrudníku/průramku */
-  left: 50%;
-}
+/* Upravené souřadnice, aby to sedělo na tvůj obrázek */
+.mk-label--body { bottom: 15%; left: 50%; } /* Uprostřed břicha */
+.mk-label--arm  { top: 40%; left: 15%; }    /* Na levém rukávu */
+.mk-label--depth { top: 30%; left: 50%; }   /* Na hrudi u průramku */
 
 
 
