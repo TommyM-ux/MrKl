@@ -216,6 +216,12 @@
 
 @media print {
   .no-print { display: none !important; }
+  @page {
+    margin: 0; /* Odstraní výchozí okraje prohlížeče, kde bývá URL */
+  }
+  body {
+    margin: 1.5cm; /* Vrátí okraje obsahu, aby text nebyl nalepený na kraji papíru */
+  }
   .mk-print-header {
     text-align: center;
     font-size: 12px;
@@ -229,7 +235,7 @@
     top: 40%;
     left: 15%;
     font-size: 64px;
-    opacity: .05;
+    opacity: .07;
     transform: rotate(-20deg);
     pointer-events: none;
   }
