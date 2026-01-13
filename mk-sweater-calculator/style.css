@@ -145,47 +145,46 @@
 /* Kontejner pro obrázek a popisky */
 .mk-diagram {
   position: relative;
-  max-width: 420px;
-  margin: 0 auto 24px;
-  width: fit-content; /* Zásadní: box se smrští na šířku obrázku */
-  line-height: 0;
+  /* Rám se smrští přesně na velikost obrázku */
+  display: inline-block; 
+  margin: 20px auto;
+  line-height: 0; /* Odstraní neviditelnou mezeru pod obrázkem */
 }
 
 .mk-diagram-img {
-  max-width: 100%;
+  max-width: 420px; /* Nebo šířka, kterou chceš */
   height: auto;
   display: block;
 }
 
 .mk-label {
   position: absolute;
-  background: rgba(255,255,255,0.95);
+  /* Transform zajistí, že souřadnice určují STŘED bubliny, ne roh */
+  transform: translate(-50%, -50%); 
+  background: white;
   border: 1px solid var(--accent);
-  border-radius: 8px;
   padding: 4px 10px;
-  font-size: 13px;
-  font-weight: 700;
+  border-radius: 8px;
+  font-weight: bold;
   color: var(--accent);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  transform: translate(-50%, -50%); /* Střed bubliny je na souřadnici */
   white-space: nowrap;
+  font-size: 13px;
   z-index: 10;
-  line-height: 1.2;
 }
 
-/* Přesné souřadnice na tělo svetru */
+/* Teď už budou tyhle % sedět přímo na nákresu */
 .mk-label--body {
-  top: 90%; /* Dole u lemu */
+  top: 90%;  /* Spodní lem */
   left: 50%;
 }
 
 .mk-label--arm {
-  top: 45%; /* Na rukávu */
-  left: 20%;
+  top: 45%;  /* Levý rukáv */
+  left: 18%;
 }
 
 .mk-label--depth {
-  top: 35%; /* Uprostřed průramku */
+  top: 35%;  /* Průramek */
   left: 50%;
 }
 
