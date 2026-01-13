@@ -142,37 +142,42 @@
 }
 .mk-help strong{ color:var(--text); }
 
-/* Kontejner pro obrázek a popisky */
-.mk-diagram {
+/* Kontejner pro obrázek a popisky */.mk-diagram {
   position: relative;
   max-width: 420px;
-  margin: 20px auto;
-  display: block; /* Důležité pro centrování */
-}
-
-.mk-diagram-img {
-  width: 100%;
-  height: auto;
-  display: block;
+  margin: 0 auto 24px;
+  display: inline-block; /* 👈 Toto zajistí, že obal bude jen tak široký jako obrázek */
 }
 
 .mk-label {
   position: absolute;
-  background: white;
-  border: 1px solid var(--accent);
-  border-radius: 6px;
+  background: rgba(255,255,255,0.9);
+  border-radius: 8px;
   padding: 4px 8px;
   font-size: 13px;
-  font-weight: bold;
-  color: var(--accent);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transform: translate(-50%, -50%); /* Centrování bubliny na bod */
+  font-weight: 700;
+  color: #ee6e62;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  /* 👈 Přidáme tohle pro lepší centrování */
+  transform: translate(-50%, -50%); 
+  white-space: nowrap;
 }
 
-/* Upravené souřadnice, aby to sedělo na tvůj obrázek */
-.mk-label--body { bottom: 15%; left: 50%; } /* Uprostřed břicha */
-.mk-label--arm  { top: 40%; left: 15%; }    /* Na levém rukávu */
-.mk-label--depth { top: 30%; left: 50%; }   /* Na hrudi u průramku */
+/* Upravené pozice, aby seděly na tvůj nákres */
+.mk-label--body {
+  bottom: 12%; 
+  left: 50%;
+}
+
+.mk-label--arm {
+  top: 40%;
+  left: 20%;
+}
+
+.mk-label--depth {
+  top: 28%;
+  left: 50%;
+}
 
 
 
