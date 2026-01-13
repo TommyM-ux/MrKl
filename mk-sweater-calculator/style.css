@@ -216,6 +216,11 @@
 
 @media print {
   .no-print { display: none !important; }
+  .mk-print-header {
+    text-align: center;
+    font-size: 12px;
+    margin-bottom: 10mm;
+  }
   .mk-grid { grid-template-columns: 1fr; }
   .mk-card { border: none; }
   .mk-output::after {
