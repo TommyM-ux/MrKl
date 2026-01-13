@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const printBtn = $('printBtn');
     if (printBtn) printBtn.style.display = 'inline-block';
   
-  // === POPISKY DO OBRÁZKU ===
+// === POPISKY DO OBRÁZKU ===
 const lblBody  = document.getElementById('lblBody');
 const lblArm   = document.getElementById('lblArm');
 const lblDepth = document.getElementById('lblDepth');
@@ -119,7 +119,8 @@ if (lblBody) {
 }
 
 if (lblArm) {
-  lblArm.textContent = `${sleeveSts} ok`;
+  // POZOR: Tady jsi měl sleeveSts, ale proměnná se jmenuje sleeveTop!
+  lblArm.textContent = `${sleeveTop} ok`; 
 }
 
 if (lblDepth) {
