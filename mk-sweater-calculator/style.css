@@ -164,10 +164,10 @@
   
   /* Výraznější barva ohraničení */
   border: 2px solid var(--accent);
-  border-radius: 12px;
+  border-radius: 10px;
   
   /* ZVĚTŠENÍ: Větší výplň (padding) a písmo */
-  padding: 8px 14px; 
+  padding: 6px 14px; 
   font-size: 14px; 
   font-weight: 800;
   color: var(--accent);
