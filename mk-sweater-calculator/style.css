@@ -147,8 +147,7 @@
   position: relative;
   max-width: 420px;
   margin: 0 auto 24px;
-  display: inline-block; /* Zajistí, že kontejner bude mít přesně velikost obrázku */
-  width: 100%;
+  display: block;
 }
 
 .mk-diagram-img {
@@ -157,42 +156,34 @@
   display: block;
 }
 
-
-/* Společný styl pro bubliny */
+/* Společný styl bublin */
 .mk-label {
   position: absolute;
-  background: rgba(255, 255, 255, 0.9); /* O něco méně průhledné pro lepší čitelnost */
-  border-radius: 6px;
-  padding: 2px 8px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  padding: 4px 8px;
   font-size: 13px;
   font-weight: 700;
-  color: #ee6e62;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  white-space: nowrap;
-  pointer-events: none; /* Bubliny nebudou překážet klikání */
-  border: 1px solid #ee6e62;
+  color: var(--accent);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  transform: translate(-50%, -50%); /* Centrování na bod */
 }
 
-/* KONKRÉTNÍ POZICE NA OBRÁZKU */
-
-/* Šířka těla – uprostřed dole nad lemem */
+/* Pozice pro tvůj obrázek svetru */
 .mk-label--body {
-  bottom: 12%; 
+  bottom: 10%; /* U spodního lemu */
   left: 50%;
-  transform: translateX(-50%);
 }
 
-/* Šířka rukávu – na levém rukávu */
 .mk-label--arm {
-  top: 45%;
-  left: 10%;
+  top: 45%;    /* Na rukávu */
+  left: 20%;
 }
 
-/* Hloubka průramku – uprostřed hrudníku */
 .mk-label--depth {
-  top: 25%;
+  top: 35%;    /* V oblasti hrudníku/průramku */
   left: 50%;
-  transform: translateX(-50%);
 }
 
 
