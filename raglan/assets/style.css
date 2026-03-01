@@ -87,3 +87,11 @@ hr{border:none;border-top:1px solid var(--line);margin:12px 0}
 @media print{
   .print-only{display:block !important;}
 }
+
+
+
+/* select readability (dark UI) */
+select, option{ color: inherit; }
+select{ background: rgba(255,255,255,0.06); }
+select:focus{ outline: 2px solid rgba(255,255,255,0.35); outline-offset: 2px; }
+option{ background: #111; color: #fff; }

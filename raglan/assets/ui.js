@@ -58,21 +58,7 @@
     }
 
     $(prefix+"printBtn")?.addEventListener("click", () => { window.print(); });
-
-    $(prefix+"copy")?.addEventListener("click", async () => {
-      const txt = $(prefix+"out")?.value || "";
-      try{
-        await navigator.clipboard.writeText(txt);
-        const ok = $(prefix+"ok");
-        if (ok) ok.textContent = "Zkopírováno do schránky.";
-        setTimeout(()=>{ if(ok) ok.textContent=""; }, 1200);
-      }catch(e){
-        const w = $(prefix+"warn");
-        if (w) w.textContent = "Nepodařilo se zkopírovat – zkus Ctrl+C v poli s návodem.";
-      }
-    });
-
-    $(prefix+"reset")?.addEventListener("click", () => {
+$(prefix+"reset")?.addEventListener("click", () => {
       localStorage.removeItem(storageKey);
       location.reload();
     });
