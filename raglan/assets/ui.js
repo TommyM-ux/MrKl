@@ -42,7 +42,10 @@
         factsEl.innerHTML = f.join(" ");
       }
 
-      outEl.value = window.RaglanStudio.genText(res);
+      const txt = window.RaglanStudio.genText(res);
+      outEl.value = txt;
+      const outHtml = $(prefix+"outHtml");
+      if (outHtml){ outHtml.textContent = txt; }
     }
 
     // bind
@@ -53,6 +56,8 @@
       el.addEventListener("input", calcAndRender);
       el.addEventListener("change", calcAndRender);
     }
+
+    $(prefix+"printBtn")?.addEventListener("click", () => { window.print(); });
 
     $(prefix+"copy")?.addEventListener("click", async () => {
       const txt = $(prefix+"out")?.value || "";

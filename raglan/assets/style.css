@@ -49,3 +49,41 @@ button:hover{filter:brightness(1.07)}
 .badge{display:inline-block;padding:2px 8px;border-radius:999px;border:1px solid var(--line);font-size:12px;color:var(--muted)}
 .small{font-size:12px;color:var(--muted)}
 hr{border:none;border-top:1px solid var(--line);margin:12px 0}
+
+/* --- Print / PDF (imported from set-in calculator) --- */
+@media print {
+  .no-print { display: none !important; }
+  @page {
+    margin: 0; /* Odstraní výchozí okraje prohlížeče, kde bývá URL */
+  }
+  body {
+    margin: 1.5cm; /* Vrátí okraje obsahu, aby text nebyl nalepený na kraji papíru */
+  }
+  .mk-print-header {
+    text-align: center;
+    font-size: 12px;
+    margin-bottom: 10mm;
+  }
+  .mk-grid { grid-template-columns: 1fr; }
+  .mk-card { border: none; }
+  .mk-output::after {
+    content: "MrKlubíčko.cz";
+    position: absolute;
+    top: 40%;
+    left: 15%;
+    font-size: 64px;
+    opacity: .07;
+    transform: rotate(-20deg);
+    pointer-events: none;
+  }
+  
+
+
+}
+/* --- print helpers (shared) --- */
+.print-only{display:none}
+.mk-output{position:relative}
+.mk-output{white-space:pre-wrap}
+@media print{
+  .print-only{display:block !important;}
+}
