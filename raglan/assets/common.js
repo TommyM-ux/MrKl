@@ -12,7 +12,13 @@
   }
   function clamp(n, a, b){ return Math.min(b, Math.max(a, n)); }
   function isNum(x){ return typeof x === 'number' && Number.isFinite(x); }
-  function toNum(v){ const n = (v==null||v==="") ? NaN : Number(v); return n; }
+  function toNum(v){
+    if (v==null) return NaN;
+    const s = String(v).trim().replace(",", ".");
+    if (s==="") return NaN;
+    const n = Number(s);
+    return Number.isFinite(n) ? n : NaN;
+  }
   function fmt1(n){ return (Math.round(n*10)/10).toString(); }
   function fmt0(n){ return (Math.round(n)).toString(); }
 
@@ -54,8 +60,7 @@
     const stPerCm = gSt10/10;
     const rowPerCm= gRow10/10;
 
-    const easeIn = inputs.fit === "snug" ? 2 : (inputs.fit === "loose" ? 6 : 4);
-    const easeCm = inchesToCm(easeIn);
+    const easeCm = inputs.fit === "snug" ? 5 : (inputs.fit === "loose" ? 15 : 10);
     const targetChestCm = chest + easeCm;
 
     const K = Math.round(targetChestCm * stPerCm); // target body circumference in stitches
@@ -309,7 +314,7 @@
   }
   function applyState(prefix, st){
     if (!st) return;
-    const set = (id, val) => { const el = $(prefix+id); if (!el) return; el.value = val; };
+    const set = (id, val) => { const el = $(prefix+id); if (!el) return; if (val===undefined || val===null) return; el.value = val; };
     set("gSt10", st.gSt10 ?? "");
     set("gRow10", st.gRow10 ?? "");
     set("chest", st.chestCm ?? "");
