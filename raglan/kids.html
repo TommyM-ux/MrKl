@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Raglán Kids – Mini Pattern Studio</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Raglán Kids</h1>
+        <p class="sub"><a href="index.html">← zpět</a> • Generátor návodu (CZ). Hlídá “proleze hlava?” (doporučuju vyplnit obvod hlavy).</p>
+      </div>
+      <div class="small"><span id="facts"></span></div>
+    </header>
+
+    <div class="grid">
+      <div class="card">
+        <h2>Vstupy</h2>
+
+        <div class="row">
+          <div>
+            <label>Gauge – oka / 10 cm</label>
+            <input id="gSt10" type="number" step="0.1" value="22">
+          </div>
+          <div>
+            <label>Gauge – řady / 10 cm</label>
+            <input id="gRow10" type="number" step="0.1" value="28">
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label>Hrudník (cm)</label>
+            <input id="chest" type="number" step="0.1" value="56">
+          </div>
+          <div>
+            <label>Obvod hlavy (cm) – doporučeno</label>
+            <input id="head" type="number" step="0.1" value="52">
+            <div class="hint">Když výstřih neprojde přes hlavu, studio ho zvětší (a řekne proč).</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label>Fit (volnost)</label>
+            <select id="fit">
+              <option value="snug">snug (+2")</option>
+              <option value="comfortable" selected>comfortable (+4")</option>
+              <option value="loose">loose (+6")</option>
+            </select>
+          </div>
+          <div>
+            <label>Výstřih (cm) – volitelné</label>
+            <input id="neck" type="number" step="0.1" placeholder="prázdné = auto (48 % / nebo hlava)">
+          </div>
+        </div>
+
+        <hr />
+
+        <div class="row3">
+          <div>
+            <label>Raglán čára (oka na čáru)</label>
+            <select id="raglanLine">
+              <option value="1" selected>1</option>
+              <option value="2">2</option>
+            </select>
+          </div>
+          <div>
+            <label>Podíl rukávu (%) z “rest”</label>
+            <input id="sleeveRatio" type="number" step="0.1" value="30">
+            <div class="hint">U dětí typicky 28–30 %. Default 30 %.</div>
+          </div>
+          <div>
+            <label>Konstrukce</label>
+            <select id="construction">
+              <option value="pullover" selected>Pulovr (v kruhu)</option>
+              <option value="cardigan">Cardigan (tam a zpět)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row3">
+          <div>
+            <label>Podpaží (%) z K – default</label>
+            <input id="underarmPct" type="number" step="0.1" value="6">
+          </div>
+          <div>
+            <label>Podpaží (oka na stranu) – override</label>
+            <input id="underarmEach" type="number" step="1" placeholder="prázdné = z %">
+          </div>
+          <div>
+            <label>Horní obvod rukávu (cm) – volitelné</label>
+            <input id="upperArm" type="number" step="0.1" placeholder="prázdné = auto">
+          </div>
+        </div>
+
+        <div class="btns">
+          <button id="copy">Kopírovat návod</button>
+          <button id="reset">Reset</button>
+        </div>
+
+        <div id="warn" class="warn"></div>
+        <div id="ok" class="ok"></div>
+      </div>
+
+      <div class="card">
+        <h2>Návod (vygenerovaný)</h2>
+        <textarea id="out" spellcheck="false"></textarea>
+        <div class="hint">Kids verze hlídá hlavu, ale pořád platí: nejlepší je 1× vyzkoušet v sedle, než dojedeš do podpaží.</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/common.js"></script>
+  <script src="assets/ui.js"></script>
+  <script>
+    (function(){
+      const origRead = window.RaglanStudio.readInputs;
+      window.RaglanStudio.readInputs = function(prefix){
+        const x = origRead(prefix);
+        if (Number.isFinite(x.sleeveRatio)){
+          x.sleeveRatio = x.sleeveRatio/100;
+        } else {
+          x.sleeveRatio = NaN;
+        }
+        return x;
+      };
+      window.initRaglanStudioPage({
+        preset: window.RaglanStudio.presets.kids,
+        storageKey: "raglan-studio-kids-v1"
+      });
+    })();
+  </script>
+</body>
+</html>
