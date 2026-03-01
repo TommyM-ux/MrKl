@@ -16,8 +16,8 @@
       <div class="small"><span id="facts"></span></div>
     </header>
 
-    <div class="grid">
-      <div class="card">
+    <div class="grid mk-grid">
+      <div class="card mk-card no-print">
         <h2>Vstupy</h2>
 
         <div class="row">
@@ -99,6 +99,7 @@
 
         <div class="btns">
           <button id="copy">Kopírovat návod</button>
+          <button id="printBtn">Tisk / PDF</button>
           <button id="reset">Reset</button>
         </div>
 
@@ -106,9 +107,12 @@
         <div id="ok" class="ok"></div>
       </div>
 
-      <div class="card">
+      <div class="card mk-card">
         <h2>Návod (vygenerovaný)</h2>
-        <textarea id="out" spellcheck="false"></textarea>
+        
+        <div class="mk-print-header print-only">Raglán shora – Kids (výpočet)</div>
+        <div id="outHtml" class="mk-output"></div>
+        <textarea id="out" class="no-print" spellcheck="false"></textarea>
         <div class="hint">Kids verze hlídá hlavu, ale pořád platí: nejlepší je 1× vyzkoušet v sedle, než dojedeš do podpaží.</div>
       </div>
     </div>
