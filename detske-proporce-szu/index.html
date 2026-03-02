@@ -35,17 +35,18 @@
         .main-layout { display: grid; grid-template-columns: 320px 1fr; border-bottom: 1px solid var(--line); }
         
         .visual-area { padding: 20px; display: flex; flex-direction: column; align-items: center; background: #fff; border-right: 1px solid var(--line); position: relative; }
-        .figure-box { position: relative; height: 400px; width: 200px; }
-        .figure-img { height: 100%; width: auto; display: block; margin: 0 auto; opacity: 0.9; }
+        .figure-box { position: relative; height: 380px; width: 220px; display: flex; align-items: flex-end; justify-content: center; }
         
-        /* Dynamické linky */
+        /* Styl pro siluetu - ořezáváme z jednoho obrázku nebo měníme src */
+        .figure-img { max-height: 100%; max-width: 100%; transition: opacity 0.3s; }
+        
         .measure-line { 
             position: absolute; left: 0; width: 100%; border-top: 2px dashed var(--primary); 
             display: none; pointer-events: none; z-index: 10;
         }
 
         .scale-bar { padding: 20px; background: var(--card); border-bottom: 1px solid var(--line); }
-        .scale-track { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; }
+        .scale-track { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: thin; }
         .height-chip { 
             flex: 0 0 auto; padding: 10px 16px; border-radius: 10px; border: 1px solid var(--line); 
             background: #fff; cursor: pointer; font-size: 14px; font-weight: 500;
@@ -54,20 +55,21 @@
 
         .table-area { padding: 24px; }
         table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; font-size: 12px; text-transform: uppercase; color: var(--muted); padding: 12px; background: var(--card); }
-        td { padding: 16px 12px; border-bottom: 1px solid var(--line); font-size: 15px; }
-        tr:hover { background: #f8fafc; cursor: default; }
+        th { text-align: left; font-size: 11px; text-transform: uppercase; color: var(--muted); padding: 12px; background: var(--card); letter-spacing: 0.05em; }
+        td { padding: 14px 12px; border-bottom: 1px solid var(--line); font-size: 14px; }
+        tr:hover { background: #f8fafc; }
 
-        .pill { padding: 4px 10px; border-radius: 99px; font-weight: 600; font-size: 13px; border: 1px solid transparent; }
+        .pill { padding: 4px 10px; border-radius: 99px; font-weight: 600; font-size: 13px; border: 1px solid transparent; display: inline-block; min-width: 35px; text-align: center; }
         .pill-slim { background: #eff6ff; color: var(--primary); border-color: #dbeafe; }
         .pill-avg { background: #f0fdf4; color: var(--avg); border-color: #dcfce7; }
         .pill-robust { background: #fff7ed; color: var(--robust); border-color: #ffedd5; }
 
-        .footer { padding: 16px 24px; background: var(--card); font-size: 12px; color: var(--muted); }
+        .footer { padding: 16px 24px; background: var(--card); font-size: 12px; color: var(--muted); line-height: 1.5; }
 
         @media (max-width: 768px) {
             .main-layout { grid-template-columns: 1fr; }
-            .visual-area { border-right: none; border-bottom: 1px solid var(--line); }
+            .visual-area { border-right: none; border-bottom: 1px solid var(--line); height: 300px; }
+            .figure-box { height: 250px; }
         }
     </style>
 </head>
@@ -77,9 +79,9 @@
     <div class="header">
         <div>
             <h1>Dětské proporce (SZÚ)</h1>
-            <p>Interaktivní tabulka rozměrů podle růstových grafů ČR.</p>
+            <p>Data vychází z percentilových růstových grafů ČR.</p>
         </div>
-        <div class="toggle-group">
+        <div class="toggle-group" id="sexToggle">
             <button class="toggle-btn active" data-sex="girls">Holka</button>
             <button class="toggle-btn" data-sex="boys">Kluk</button>
         </div>
@@ -91,14 +93,14 @@
 
     <div class="main-layout">
         <div class="visual-area">
-            <div class="figure-box">
+            <div class="figure-box" id="figureBox">
                 <div id="line-head" class="measure-line" style="top: 10%;"></div>
-                <div id="line-arm" class="measure-line" style="top: 32%; width: 50%; left: 25%;"></div>
-                <div id="line-belly" class="measure-line" style="top: 48%;"></div>
-                <div id="line-hips" class="measure-line" style="top: 58%;"></div>
-                <img src="silueta.png" class="figure-img" alt="Postava">
+                <div id="line-arm" class="measure-line" style="top: 35%; width: 50%; left: 25%;"></div>
+                <div id="line-belly" class="measure-line" style="top: 50%;"></div>
+                <div id="line-hips" class="measure-line" style="top: 60%;"></div>
+                <img src="silueta_stredni.png" id="mainFigure" class="figure-img" alt="Postava">
             </div>
-            <div style="margin-top: 15px; font-weight: bold;" id="ageLabel">Věk: —</div>
+            <div style="margin-top: 15px; font-weight: bold; color: var(--primary);" id="ageLabel">Věk: —</div>
         </div>
 
         <div class="table-area">
@@ -117,33 +119,63 @@
     </div>
 
     <div class="footer">
-        Zdroj: Státní zdravotní ústav (SZÚ) - Percentilové grafy. Hodnoty odpovídají 25., 50. a 75. percentilu.
+        Zdroj: Státní zdravotní ústav (SZÚ) - Grant IGA MZ ČR NJ/6792-3/2001.<br>
+        Tabulka zobrazuje orientační hodnoty pro 25., 50. (průměr) a 75. percentil.
     </div>
 </div>
 
 <script>
+// Kompletní data ze zaslaných PDF
 const DATA = {
     98: {
-        girls: { age: "3 roky", measures: { "Obvod hlavy": { slim: 48.3, avg: 49.2, robust: 50.1, line: "head" }, "Obvod paže": { slim: 15.2, avg: 16.1, robust: 17.2, line: "arm" }, "Obvod břicha": { slim: 47.5, avg: 50.0, robust: 53.0, line: "belly" }, "Obvod boků": { slim: 52.0, avg: 55.0, robust: 58.5, line: "hips" } } },
-        boys:  { age: "3 roky", measures: { "Obvod hlavy": { slim: 49.2, avg: 50.2, robust: 51.2, line: "head" }, "Obvod paže": { slim: 15.5, avg: 16.4, robust: 17.6, line: "arm" }, "Obvod břicha": { slim: 48.5, avg: 51.0, robust: 54.0, line: "belly" }, "Obvod boků": { slim: 51.5, avg: 54.0, robust: 57.5, line: "hips" } } }
+        girls: { age: "≈ 3 roky", measures: { "Obvod hlavy": { slim: 48.3, avg: 49.2, robust: 50.1, line: "head" }, "Obvod paže": { slim: 15.2, avg: 16.1, robust: 17.2, line: "arm" }, "Obvod břicha": { slim: 47.5, avg: 50.0, robust: 53.0, line: "belly" }, "Obvod boků": { slim: 52.0, avg: 55.0, robust: 58.5, line: "hips" } } },
+        boys:  { age: "≈ 3 roky", measures: { "Obvod hlavy": { slim: 49.2, avg: 50.2, robust: 51.2, line: "head" }, "Obvod paže": { slim: 15.5, avg: 16.4, robust: 17.6, line: "arm" }, "Obvod břicha": { slim: 48.5, avg: 51.0, robust: 54.0, line: "belly" }, "Obvod boků": { slim: 51.5, avg: 54.0, robust: 57.5, line: "hips" } } }
     },
-    // ... (ZDE VLOŽ ZBYTEK DATA OBJEKTU Z PŘEDCHOZÍ ODPOVĚDI) ...
+    104: {
+        girls: { age: "≈ 4 roky", measures: { "Obvod hlavy": { slim: 49.0, avg: 50.0, robust: 51.0, line: "head" }, "Obvod paže": { slim: 15.6, avg: 16.6, robust: 18.0, line: "arm" }, "Obvod břicha": { slim: 49.0, avg: 51.5, robust: 54.5, line: "belly" }, "Obvod boků": { slim: 54.0, avg: 57.5, robust: 61.5, line: "hips" } } },
+        boys:  { age: "≈ 4 roky", measures: { "Obvod hlavy": { slim: 50.0, avg: 51.0, robust: 52.0, line: "head" }, "Obvod paže": { slim: 16.0, avg: 17.0, robust: 18.5, line: "arm" }, "Obvod břicha": { slim: 50.0, avg: 52.5, robust: 55.5, line: "belly" }, "Obvod boků": { slim: 53.5, avg: 56.5, robust: 60.5, line: "hips" } } }
+    },
+    110: {
+        girls: { age: "≈ 5 let", measures: { "Obvod hlavy": { slim: 49.8, avg: 50.8, robust: 51.8, line: "head" }, "Obvod paže": { slim: 16.2, avg: 17.2, robust: 18.6, line: "arm" }, "Obvod břicha": { slim: 50.0, avg: 53.0, robust: 56.5, line: "belly" }, "Obvod boků": { slim: 56.5, avg: 60.0, robust: 64.5, line: "hips" } } },
+        boys:  { age: "≈ 5 let", measures: { "Obvod hlavy": { slim: 50.8, avg: 51.8, robust: 52.8, line: "head" }, "Obvod paže": { slim: 16.6, avg: 17.6, robust: 19.1, line: "arm" }, "Obvod břicha": { slim: 51.0, avg: 54.0, robust: 57.5, line: "belly" }, "Obvod boků": { slim: 55.5, avg: 59.0, robust: 63.0, line: "hips" } } }
+    },
+    116: {
+        girls: { age: "≈ 6 let", measures: { "Obvod hlavy": { slim: 50.4, avg: 51.4, robust: 52.4, line: "head" }, "Obvod paže": { slim: 16.8, avg: 18.0, robust: 19.5, line: "arm" }, "Obvod břicha": { slim: 51.5, avg: 54.5, robust: 58.0, line: "belly" }, "Obvod boků": { slim: 58.5, avg: 62.5, robust: 67.5, line: "hips" } } },
+        boys:  { age: "≈ 6 let", measures: { "Obvod hlavy": { slim: 51.4, avg: 52.4, robust: 53.4, line: "head" }, "Obvod paže": { slim: 17.2, avg: 18.3, robust: 19.8, line: "arm" }, "Obvod břicha": { slim: 52.5, avg: 55.5, robust: 59.0, line: "belly" }, "Obvod boků": { slim: 58.0, avg: 61.5, robust: 66.0, line: "hips" } } }
+    },
+    128: {
+        girls: { age: "≈ 8 let", measures: { "Obvod hlavy": { slim: 51.5, avg: 52.5, robust: 53.5, line: "head" }, "Obvod paže": { slim: 17.8, avg: 19.2, robust: 21.0, line: "arm" }, "Obvod břicha": { slim: 54.0, avg: 58.0, robust: 63.0, line: "belly" }, "Obvod boků": { slim: 63.0, avg: 67.5, robust: 73.5, line: "hips" } } },
+        boys:  { age: "≈ 8 let", measures: { "Obvod hlavy": { slim: 52.4, avg: 53.4, robust: 54.4, line: "head" }, "Obvod paže": { slim: 18.2, avg: 19.5, robust: 21.5, line: "arm" }, "Obvod břicha": { slim: 55.0, avg: 59.0, robust: 64.0, line: "belly" }, "Obvod boků": { slim: 62.5, avg: 66.5, robust: 72.0, line: "hips" } } }
+    },
+    140: {
+        girls: { age: "≈ 10 let", measures: { "Obvod hlavy": { slim: 52.3, avg: 53.3, robust: 54.3, line: "head" }, "Obvod paže": { slim: 19.2, avg: 21.2, robust: 23.8, line: "arm" }, "Obvod břicha": { slim: 57.5, avg: 62.0, robust: 68.0, line: "belly" }, "Obvod boků": { slim: 70.0, avg: 76.0, robust: 83.5, line: "hips" } } },
+        boys:  { age: "≈ 10 let", measures: { "Obvod hlavy": { slim: 53.2, avg: 54.2, robust: 55.2, line: "head" }, "Obvod paže": { slim: 19.8, avg: 21.5, robust: 24.2, line: "arm" }, "Obvod břicha": { slim: 58.5, avg: 63.0, robust: 69.5, line: "belly" }, "Obvod boků": { slim: 68.5, avg: 74.5, robust: 81.5, line: "hips" } } }
+    },
+    152: {
+        girls: { age: "≈ 12 let", measures: { "Obvod hlavy": { slim: 53.0, avg: 54.0, robust: 55.0, line: "head" }, "Obvod paže": { slim: 21.2, avg: 23.5, robust: 26.8, line: "arm" }, "Obvod břicha": { slim: 61.0, avg: 66.5, robust: 73.5, line: "belly" }, "Obvod boků": { slim: 78.0, avg: 85.0, robust: 93.0, line: "hips" } } },
+        boys:  { age: "≈ 12 let", measures: { "Obvod hlavy": { slim: 54.2, avg: 55.2, robust: 56.5, line: "head" }, "Obvod paže": { slim: 21.2, avg: 23.8, robust: 27.2, line: "arm" }, "Obvod břicha": { slim: 62.5, avg: 68.0, robust: 75.5, line: "belly" }, "Obvod boků": { slim: 75.5, avg: 82.5, robust: 90.5, line: "hips" } } }
+    },
+    164: {
+        girls: { age: "≈ 14 let", measures: { "Obvod hlavy": { slim: 53.6, avg: 54.6, robust: 55.6, line: "head" }, "Obvod paže": { slim: 23.0, avg: 25.8, robust: 29.5, line: "arm" }, "Obvod břicha": { slim: 65.0, avg: 71.5, robust: 79.5, line: "belly" }, "Obvod boků": { slim: 86.0, avg: 93.0, robust: 101.5, line: "hips" } } },
+        boys:  { age: "≈ 14 let", measures: { "Obvod hlavy": { slim: 55.2, avg: 56.4, robust: 57.8, line: "head" }, "Obvod paže": { slim: 23.2, avg: 26.2, robust: 30.2, line: "arm" }, "Obvod břicha": { slim: 67.5, avg: 74.0, robust: 83.0, line: "belly" }, "Obvod boků": { slim: 83.0, avg: 90.5, robust: 99.0, line: "hips" } } }
+    }
 };
 
-const HEIGHTS = [98, 104, 110, 116, 122, 128, 134, 140, 152, 164];
+const HEIGHTS = [98, 104, 110, 116, 128, 140, 152, 164];
 let state = { sex: 'girls', height: 128 };
 
 function render() {
-    // Render Heights
+    // 1. Render výškové čipy
     const track = document.getElementById('heightTrack');
     track.innerHTML = HEIGHTS.map(h => `
         <div class="height-chip ${h === state.height ? 'active' : ''}" onclick="updateHeight(${h})">${h} cm</div>
     `).join('');
 
-    // Render Table
+    // 2. Načtení dat pro aktuální stav
     const pack = DATA[state.height][state.sex];
     document.getElementById('ageLabel').textContent = `Odpovídá věku: ${pack.age}`;
     
+    // 3. Render tabulky
     const html = Object.entries(pack.measures).map(([name, vals]) => `
         <tr onmouseenter="showLine('${vals.line}')" onmouseleave="hideLines()">
             <td>${name}</td>
@@ -154,20 +186,46 @@ function render() {
     `).join('');
     document.getElementById('tableBody').innerHTML = html;
 
-    // Toggle Buttons
+    // 4. Aktualizace přepínače pohlaví
     document.querySelectorAll('.toggle-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.sex === state.sex);
     });
+
+    // 5. Aktualizace siluety (logika pro 3 typy)
+    const img = document.getElementById('mainFigure');
+    if (state.height <= 104) {
+        img.src = 'silueta_male.png'; // Menší dítě
+    } else if (state.sex === 'girls') {
+        img.src = 'silueta_holka.png';
+    } else {
+        img.src = 'silueta_kluk.png';
+    }
 }
 
-function updateHeight(h) { state.height = h; render(); }
-function showLine(id) { hideLines(); const el = document.getElementById('line-' + id); if(el) el.style.display = 'block'; }
-function hideLines() { document.querySelectorAll('.measure-line').forEach(l => l.style.display = 'none'); }
+function updateHeight(h) { 
+    state.height = h; 
+    render(); 
+}
 
-document.querySelectorAll('.toggle-btn').forEach(btn => {
-    btn.onclick = () => { state.sex = btn.dataset.sex; render(); };
+function showLine(id) { 
+    hideLines(); 
+    const el = document.getElementById('line-' + id); 
+    if(el) el.style.display = 'block'; 
+}
+
+function hideLines() { 
+    document.querySelectorAll('.measure-line').forEach(l => l.style.display = 'none'); 
+}
+
+// Event delegace pro přepínač pohlaví
+document.getElementById('sexToggle').addEventListener('click', (e) => {
+    if (e.target.classList.contains('toggle-btn')) {
+        state.sex = e.target.dataset.sex;
+        render();
+    }
 });
 
+// Prvotní vykreslení
 render();
 </script>
 </body>
