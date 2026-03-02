@@ -1,1 +1,174 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dětské proporce - SZÚ Data</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --avg: #16a34a;
+            --robust: #f97316;
+            --bg: #ffffff;
+            --card: #f9fafb;
+            --line: #e5e7eb;
+            --text: #111827;
+            --muted: #6b7280;
+        }
 
+        body { font-family: system-ui, -apple-system, sans-serif; background: #f3f4f6; padding: 20px; color: var(--text); }
+
+        .widget {
+            max-width: 900px; margin: 0 auto; background: var(--bg);
+            border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            overflow: hidden; border: 1px solid var(--line);
+        }
+
+        .header { padding: 24px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; }
+        .header h1 { margin: 0 0 8px 0; font-size: 22px; }
+        .header p { margin: 0; color: var(--muted); font-size: 14px; }
+
+        .toggle-group { display: flex; background: var(--card); padding: 4px; border-radius: 12px; border: 1px solid var(--line); }
+        .toggle-btn { border: none; background: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; color: var(--muted); transition: 0.2s; }
+        .toggle-btn.active { background: #fff; color: var(--text); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+
+        .main-layout { display: grid; grid-template-columns: 320px 1fr; border-bottom: 1px solid var(--line); }
+        
+        .visual-area { padding: 20px; display: flex; flex-direction: column; align-items: center; background: #fff; border-right: 1px solid var(--line); position: relative; }
+        .figure-box { position: relative; height: 400px; width: 200px; }
+        .figure-img { height: 100%; width: auto; display: block; margin: 0 auto; opacity: 0.9; }
+        
+        /* Dynamické linky */
+        .measure-line { 
+            position: absolute; left: 0; width: 100%; border-top: 2px dashed var(--primary); 
+            display: none; pointer-events: none; z-index: 10;
+        }
+
+        .scale-bar { padding: 20px; background: var(--card); border-bottom: 1px solid var(--line); }
+        .scale-track { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; }
+        .height-chip { 
+            flex: 0 0 auto; padding: 10px 16px; border-radius: 10px; border: 1px solid var(--line); 
+            background: #fff; cursor: pointer; font-size: 14px; font-weight: 500;
+        }
+        .height-chip.active { border-color: var(--primary); background: #eff6ff; color: var(--primary); }
+
+        .table-area { padding: 24px; }
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; font-size: 12px; text-transform: uppercase; color: var(--muted); padding: 12px; background: var(--card); }
+        td { padding: 16px 12px; border-bottom: 1px solid var(--line); font-size: 15px; }
+        tr:hover { background: #f8fafc; cursor: default; }
+
+        .pill { padding: 4px 10px; border-radius: 99px; font-weight: 600; font-size: 13px; border: 1px solid transparent; }
+        .pill-slim { background: #eff6ff; color: var(--primary); border-color: #dbeafe; }
+        .pill-avg { background: #f0fdf4; color: var(--avg); border-color: #dcfce7; }
+        .pill-robust { background: #fff7ed; color: var(--robust); border-color: #ffedd5; }
+
+        .footer { padding: 16px 24px; background: var(--card); font-size: 12px; color: var(--muted); }
+
+        @media (max-width: 768px) {
+            .main-layout { grid-template-columns: 1fr; }
+            .visual-area { border-right: none; border-bottom: 1px solid var(--line); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="widget" id="szuWidget">
+    <div class="header">
+        <div>
+            <h1>Dětské proporce (SZÚ)</h1>
+            <p>Interaktivní tabulka rozměrů podle růstových grafů ČR.</p>
+        </div>
+        <div class="toggle-group">
+            <button class="toggle-btn active" data-sex="girls">Holka</button>
+            <button class="toggle-btn" data-sex="boys">Kluk</button>
+        </div>
+    </div>
+
+    <div class="scale-bar">
+        <div class="scale-track" id="heightTrack"></div>
+    </div>
+
+    <div class="main-layout">
+        <div class="visual-area">
+            <div class="figure-box">
+                <div id="line-head" class="measure-line" style="top: 10%;"></div>
+                <div id="line-arm" class="measure-line" style="top: 32%; width: 50%; left: 25%;"></div>
+                <div id="line-belly" class="measure-line" style="top: 48%;"></div>
+                <div id="line-hips" class="measure-line" style="top: 58%;"></div>
+                <img src="silueta.png" class="figure-img" alt="Postava">
+            </div>
+            <div style="margin-top: 15px; font-weight: bold;" id="ageLabel">Věk: —</div>
+        </div>
+
+        <div class="table-area">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Míra (cm)</th>
+                        <th>Drobná</th>
+                        <th>Průměrná</th>
+                        <th>Robustní</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="footer">
+        Zdroj: Státní zdravotní ústav (SZÚ) - Percentilové grafy. Hodnoty odpovídají 25., 50. a 75. percentilu.
+    </div>
+</div>
+
+<script>
+const DATA = {
+    98: {
+        girls: { age: "3 roky", measures: { "Obvod hlavy": { slim: 48.3, avg: 49.2, robust: 50.1, line: "head" }, "Obvod paže": { slim: 15.2, avg: 16.1, robust: 17.2, line: "arm" }, "Obvod břicha": { slim: 47.5, avg: 50.0, robust: 53.0, line: "belly" }, "Obvod boků": { slim: 52.0, avg: 55.0, robust: 58.5, line: "hips" } } },
+        boys:  { age: "3 roky", measures: { "Obvod hlavy": { slim: 49.2, avg: 50.2, robust: 51.2, line: "head" }, "Obvod paže": { slim: 15.5, avg: 16.4, robust: 17.6, line: "arm" }, "Obvod břicha": { slim: 48.5, avg: 51.0, robust: 54.0, line: "belly" }, "Obvod boků": { slim: 51.5, avg: 54.0, robust: 57.5, line: "hips" } } }
+    },
+    // ... (ZDE VLOŽ ZBYTEK DATA OBJEKTU Z PŘEDCHOZÍ ODPOVĚDI) ...
+};
+
+const HEIGHTS = [98, 104, 110, 116, 122, 128, 134, 140, 152, 164];
+let state = { sex: 'girls', height: 128 };
+
+function render() {
+    // Render Heights
+    const track = document.getElementById('heightTrack');
+    track.innerHTML = HEIGHTS.map(h => `
+        <div class="height-chip ${h === state.height ? 'active' : ''}" onclick="updateHeight(${h})">${h} cm</div>
+    `).join('');
+
+    // Render Table
+    const pack = DATA[state.height][state.sex];
+    document.getElementById('ageLabel').textContent = `Odpovídá věku: ${pack.age}`;
+    
+    const html = Object.entries(pack.measures).map(([name, vals]) => `
+        <tr onmouseenter="showLine('${vals.line}')" onmouseleave="hideLines()">
+            <td>${name}</td>
+            <td><span class="pill pill-slim">${vals.slim}</span></td>
+            <td><span class="pill pill-avg">${vals.avg}</span></td>
+            <td><span class="pill pill-robust">${vals.robust}</span></td>
+        </tr>
+    `).join('');
+    document.getElementById('tableBody').innerHTML = html;
+
+    // Toggle Buttons
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.sex === state.sex);
+    });
+}
+
+function updateHeight(h) { state.height = h; render(); }
+function showLine(id) { hideLines(); const el = document.getElementById('line-' + id); if(el) el.style.display = 'block'; }
+function hideLines() { document.querySelectorAll('.measure-line').forEach(l => l.style.display = 'none'); }
+
+document.querySelectorAll('.toggle-btn').forEach(btn => {
+    btn.onclick = () => { state.sex = btn.dataset.sex; render(); };
+});
+
+render();
+</script>
+</body>
+</html>
