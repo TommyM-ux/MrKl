@@ -23,9 +23,30 @@
         .height-chip.active { border-color: var(--primary); background: #eff6ff; color: var(--primary); font-weight: bold; }
         .main-layout { display: grid; grid-template-columns: 350px 1fr; }
         .visual-area { padding: 20px; display: flex; flex-direction: column; align-items: center; border-right: 1px solid var(--line); background: #fff; }
-        .figure-box { position: relative; height: 450px; width: 250px; display: flex; align-items: center; justify-content: center; }
-        .figure-img { max-height: 95%; width: auto; opacity: 0.9; }
-        .measure-line { position: absolute; border-top: 2px dashed #ee6e62; display: none; pointer-events: none; z-index: 10; transition: all 0.2s; }
+        .figure-box { 
+    position: relative; 
+    width: 100%;           /* Roztáhne se podle kontejneru */
+    max-width: 250px;      /* Ale ne víc než tvých laděných 250px */
+    height: auto;          /* Výška se dopočítá podle obrázku */
+    aspect-ratio: 250 / 450; /* Drží poměr stran, na který jsi to ladil */
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    margin: 0 auto;
+}
+        .figure-img { 
+    width: 100%; 
+    height: auto; 
+    display: block;
+    opacity: 0.9; 
+}
+        .measure-line { 
+    position: absolute; 
+    border-top: 3px dashed #ee6e62; /* Trošku tlustší pro mobil */
+    display: none; 
+    pointer-events: none; 
+    z-index: 10; 
+}
         #line-arm { border-top-style: solid; border-top-width: 3px; }
         .table-area { padding: 24px; overflow-x: auto; }
         table { width: 100%; border-collapse: collapse; }
