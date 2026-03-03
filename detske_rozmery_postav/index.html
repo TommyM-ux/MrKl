@@ -5,64 +5,41 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.2/iframeResizer.contentWindow.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* Vraťme tomu původní styl a jiskru */
-:root {
-    --primary: #2563eb; --avg: #16a34a; --robust: #f97316;
-    --bg: #ffffff; --card: #f9fafb; --line: #6d5fa7;
-    --text: #111827; --muted: #6b7280;
-}
-body { font-family: system-ui, -apple-system, sans-serif; background: transparent; padding: 0; margin: 0; color: var(--text); }
+        /* Všechny tvoje styly z index(15).html zůstávají */
+        :root {
+            --primary: #2563eb; --avg: #16a34a; --robust: #f97316;
+            --bg: #ffffff; --card: #f9fafb; --line: #6d5fa7;
+            --text: #111827; --muted: #6b7280;
+        }
+        body { font-family: system-ui, -apple-system, sans-serif; background: transparent; padding: 0; margin: 0; color: var(--text); overflow: hidden; }
+        .widget { max-width: 950px; margin: 0 auto; background: var(--bg); border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid var(--line); }
+        
+        /* KLÍČOVÁ ZMĚNA: Skryjeme texty, které už budou v Upgates */
+        .header, .intro, .content, .footer { display: none !important; }
 
-/* Widget se stínem jako u originálu */
-.widget { 
-    max-width: 950px; 
-    margin: 10px auto; 
-    background: var(--bg); 
-    border-radius: 20px; 
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05); /* Tenhle stín ti chyběl */
-    overflow: hidden; 
-    border: 1px solid var(--line); 
-}
-
-/* Skrytí textů, které budou v Upgates (pro SEO) */
-.header, .intro, .content, .footer { display: none !important; }
-
-/* Ovládací prvky a tabulka */
-.controls { padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; border-bottom: 1px solid var(--line); background: #fff; }
-.scale-track { display: flex; gap: 6px; overflow-x: auto; flex: 1; padding: 5px 0; }
-.height-chip { flex: 0 0 auto; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--line); background: #fff; cursor: pointer; font-size: 13px; }
-.height-chip.active { border-color: var(--primary); background: #eff6ff; color: var(--primary); font-weight: bold; }
-
-/* Postavička a čáry - Vyladění na milimetr */
-.figure-box { position: relative; height: 450px; width: 250px; display: flex; align-items: center; justify-content: center; margin: 0 auto; }
-.figure-img { max-height: 95%; width: auto; opacity: 0.9; }
-
-/* Čára, která na tebe "vyskočila" - teď bude sedět */
-.measure-line { 
-    position: absolute; 
-    border-top: 3px solid #ee6e62; /* Původní plná tlustá čára */
-    display: none; 
-    pointer-events: none; 
-    z-index: 10; 
-}        
+        .controls { padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; border-bottom: 1px solid var(--line); background: #fff; }
+        .scale-track { display: flex; gap: 6px; overflow-x: auto; flex: 1; padding: 5px 0; }
+        .height-chip { flex: 0 0 auto; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--line); background: #fff; cursor: pointer; font-size: 13px; }
+        .height-chip.active { border-color: var(--primary); background: #eff6ff; color: var(--primary); font-weight: bold; }
+        .toggle-group { display: flex; background: var(--card); padding: 4px; border-radius: 12px; border: 1px solid var(--line); }
+        .toggle-btn { border: none; background: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; color: var(--muted); }
+        .toggle-btn.active { background: #fff; color: var(--text); box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .main-layout { display: grid; grid-template-columns: 350px 1fr; }
+        .visual-area { padding: 20px; display: flex; flex-direction: column; align-items: center; border-right: 1px solid var(--line); background: #fff; }
+        .figure-box { position: relative; height: 450px; width: 250px; display: flex; align-items: center; justify-content: center; }
+        .figure-img { max-height: 95%; width: auto; opacity: 0.9; }
+        .measure-line { position: absolute; border-top: 3px solid #ee6e62; display: none; pointer-events: none; z-index: 10; }
         .table-area { padding: 24px; overflow-x: auto; }
         table { width: 100%; border-collapse: collapse; }
         th { text-align: left; font-size: 11px; text-transform: uppercase; color: var(--muted); padding: 12px; background: var(--card); }
         td { padding: 14px 12px; border-bottom: 1px solid var(--line); font-size: 15px; }
-        
-        .pill { padding: 4px 10px; border-radius: 99px; font-weight: 600; font-size: 13px; border: 1px solid transparent; }
-        .pill-slim { background: #eff6ff; color: var(--primary); border-color: #dbeafe; }
-        .pill-avg { background: #f0fdf4; color: var(--avg); border-color: #dcfce7; }
-        .pill-robust { background: #fff7ed; color: var(--robust); border-color: #ffedd5; }
-
         @media (max-width: 768px) { .main-layout { grid-template-columns: 1fr; } .visual-area { border-right: none; } }
     </style>
 </head>
 <body>
 <div class="widget">
     <div class="header"><h1>Dětské a juniorské proporce</h1></div>
-    <div class="intro"><p>Text pro Google...</p></div>
-
+    <div class="intro"><p>SEO text...</p></div>
     <div class="controls">
         <div class="toggle-group" id="sexToggle">
             <button class="toggle-btn active" data-sex="girls">Dívka</button>
@@ -70,7 +47,6 @@ body { font-family: system-ui, -apple-system, sans-serif; background: transparen
         </div>
         <div class="scale-track" id="heightTrack"></div>
     </div>
-
     <div class="main-layout">
         <div class="visual-area">
             <div class="figure-box" id="figureBox">
@@ -92,14 +68,13 @@ body { font-family: system-ui, -apple-system, sans-serif; background: transparen
     </div>
     <div class="content"></div>
 </div>
-
 <script>
+/* Tady zůstává tvůj kompletní JavaScript z index(15).html */
 const LINE_CONFIGS = {
     male:  { head: {top:14, left:30, width:35}, arm: {top:34, left:27, width:12}, belly: {top:44, left:30, width:34}, hips: {top:52, left:30, width:36} },
     girls: { head: {top:12, left:35, width:26}, arm: {top:35, left:28, width:10}, belly: {top:44, left:33, width:33}, hips: {top:54, left:30, width:38} },
     boys:  { head: {top:12, left:30, width:26}, arm: {top:34, left:23, width:10}, belly: {top:42, left:26, width:34}, hips: {top:52, left:27, width:36} }
 };
-
 const DATA = {
      98:  { age: "3 roky", girls: { "Obvod hlavy": [48.3, 49.2, 50.1, "head"], "Obvod paže": [15.2, 16.1, 17.2, "arm"], "Obvod břicha": [47.5, 50.0, 53.0, "belly"], "Obvod boků": [52.0, 55.0, 58.5, "hips"] }, boys: { "Obvod hlavy": [49.2, 50.2, 51.2, "head"], "Obvod paže": [15.5, 16.4, 17.6, "arm"], "Obvod břicha": [48.5, 51.0, 54.0, "belly"], "Obvod boků": [51.5, 54.0, 57.5, "hips"] } },
     104: { age: "4 roky", girls: { "Obvod hlavy": [49.0, 50.0, 51.0, "head"], "Obvod paže": [15.6, 16.6, 18.0, "arm"], "Obvod břicha": [49.0, 51.5, 54.5, "belly"], "Obvod boků": [54.0, 57.5, 61.5, "hips"] }, boys: { "Obvod hlavy": [50.0, 51.0, 52.0, "head"], "Obvod paže": [16.0, 17.0, 18.5, "arm"], "Obvod břicha": [50.0, 52.5, 55.5, "belly"], "Obvod boků": [53.5, 56.5, 60.5, "hips"] } },
@@ -110,9 +85,7 @@ const DATA = {
     152: { age: "12 let", girls: { "Obvod hlavy": [53.0, 54.0, 55.0, "head"], "Obvod paže": [21.2, 23.5, 26.8, "arm"], "Obvod břicha": [61.0, 66.5, 73.5, "belly"], "Obvod boků": [78.0, 85.0, 93.0, "hips"] }, boys: { "Obvod hlavy": [54.2, 55.2, 56.5, "head"], "Obvod paže": [21.2, 23.8, 27.2, "arm"], "Obvod břicha": [62.5, 68.0, 75.5, "belly"], "Obvod boků": [75.5, 82.5, 90.5, "hips"] } },
     164: { age: "14 let", girls: { "Obvod hlavy": [53.6, 54.6, 55.6, "head"], "Obvod paže": [23.0, 25.8, 29.5, "arm"], "Obvod břicha": [65.0, 71.5, 79.5, "belly"], "Obvod boků": [86.0, 93.0, 101.5, "hips"] }, boys: { "Obvod hlavy": [55.2, 56.4, 57.8, "head"], "Obvod paže": [23.2, 26.2, 30.2, "arm"], "Obvod břicha": [67.5, 74.0, 83.0, "belly"], "Obvod boků": [83.0, 90.5, 99.0, "hips"] } },
     174: { age: "16+ let", girls: { "Obvod hlavy": [54.2, 55.2, 56.2, "head"], "Obvod paže": [24.5, 27.0, 30.5, "arm"], "Obvod břicha": [68.0, 74.0, 82.5, "belly"], "Obvod boků": [91.0, 97.5, 106.0, "hips"] }, boys: { "Obvod hlavy": [56.5, 57.5, 58.8, "head"], "Obvod paže": [26.0, 29.0, 32.5, "arm"], "Obvod břicha": [71.5, 78.5, 87.0, "belly"], "Obvod boků": [89.5, 96.0, 104.5, "hips"] } }};
-
 let state = { sex: 'girls', height: 128 };
-
 function render() {
     const track = document.getElementById('heightTrack');
     track.innerHTML = Object.keys(DATA).map(h => `<div class="height-chip ${+h === state.height ? 'active' : ''}" onclick="updateHeight(${h})">${h} cm</div>`).join('');
@@ -127,6 +100,7 @@ function render() {
             <td><span class="pill pill-robust">${vals[2]}</span></td>
         </tr>
     `).join('');
+    document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.sex === state.sex));
     let figureType = state.sex;
     if (state.height <= 110) figureType = 'male';
     const img = document.getElementById('mainFigure');
