@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dětské a juniorské proporce postav - SZÚ Data</title>
+    <meta name="description" content="Přehled dětských proporcí podle výšky a věku. Orientační obvod hlavy, paže, břicha a boků podle percentilových grafů SZÚ ČR.">
+    <title>Dětské proporce podle výšky a věku | Percentilová tabulka SZÚ</title>
     <style>
         :root {
             --primary: #2563eb; --avg: #16a34a; --robust: #f97316;
@@ -36,18 +37,80 @@
         .pill-robust { background: #fff7ed; color: var(--robust); border-color: #ffedd5; }
         .footer { padding: 16px 24px; background: var(--card); font-size: 12px; color: var(--muted); }
         @media (max-width: 768px) { .main-layout { grid-template-columns: 1fr; } .visual-area { border-right: none; } }
+    
+
+
+        /* Brand + typography */
+        .brand { display:flex; gap:14px; align-items:center; min-width: 280px; }
+        .brand-logo { display:block; width:34px; height:34px; border-radius:10px; object-fit:contain; box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        .brand-text h1 { margin:0; font-size: 22px; letter-spacing: -0.02em; }
+        .brand-text p { margin:6px 0 0; color: var(--muted); font-size: 13px; }
+
+        /* Layout polish */
+        body { background: radial-gradient(1000px 600px at 20% 0%, rgba(37,99,235,0.06), transparent 60%),
+                         radial-gradient(800px 500px at 90% 10%, rgba(249,115,22,0.05), transparent 55%),
+                         #f3f4f6; }
+        .header { gap: 14px; }
+        .scale-track { background: #fbfbfc; }
+
+        /* Content section */
+        .content {
+            padding: 26px 24px 30px;
+            border-top: 1px solid var(--line);
+            background: linear-gradient(#fff, #fff) padding-box,
+                        linear-gradient(to bottom, rgba(0,0,0,0.02), rgba(0,0,0,0)) border-box;
+        }
+        .content h2 {
+            font-size: 18px;
+            margin: 18px 0 10px;
+            letter-spacing: -0.01em;
+        }
+        .content h2:first-child { margin-top: 0; }
+        .content p {
+            margin: 0 0 10px;
+            max-width: 78ch;
+            color: #1f2937;
+            line-height: 1.65;
+        }
+
+        .footer {
+            display:flex;
+            gap: 10px;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            font-size: 12px;
+            line-height: 1.45;
+            color: var(--muted);
+            background: #fbfbfc;
+        }
+
+        /* Better mobile wrapping */
+        @media (max-width: 720px) {
+            .brand { width: 100%; }
+            .brand-text h1 { font-size: 20px; }
+        }
+    
     </style>
 </head>
 <body>
 
 <div class="widget">
     <div class="header">
-        <div><h1>Dětské a juniorské proporce těla současné populace</h2><p>Data SZÚ ČR (Percentilové grafy)</p></div>
-        <div class="toggle-group" id="sexToggle">
-            <button class="toggle-btn active" data-sex="girls">Dívka</button>
-            <button class="toggle-btn" data-sex="boys">Chlapec</button>
+        <div class="brand">
+            <!-- Nahraď cestu src svým logem (SVG/PNG). Doporučení: ~28–34px výška. -->
+            <img class="brand-logo" src="logo.svg" alt="Logo" width="34" height="34">
+            <div class="brand-text">
+                <h1>Dětské a juniorské proporce těla současné populace</h1>
+                <p>Data SZÚ ČR (percentilové grafy) • orientační hodnoty</p>
+            </div>
+        </div>
+
+        <div class="toggle-group" id="sexToggle" aria-label="Pohlaví">
+            <button class="toggle-btn active" data-sex="girls" type="button">Holka</button>
+            <button class="toggle-btn" data-sex="boys" type="button">Kluk</button>
         </div>
     </div>
+
     <div class="scale-track" id="heightTrack"></div>
     <div class="main-layout">
         <div class="visual-area">
@@ -67,7 +130,30 @@
             </table>
         </div>
     </div>
-    <div class="footer">Zdroj: Státní zdravotní ústav, CAV 2001 https://szu.gov.cz/publikace-szu/data/hodnoceni-rustu-a-vyvoje/. Pro výšku >170cm použita data pro 16-18 let.</div>
+    
+    <div class="content">
+        <h2>Jak číst tabulku</h2>
+        <p>
+            Tabulka zobrazuje orientační rozměry dětské postavy podle zvolené tělesné výšky.
+            Sloupce <strong>Drobná / Průměrná / Robustní</strong> odpovídají přibližně 25., 50. a 75. percentilu populace.
+            Nejde o hodnocení dítěte – jen o statistické srovnání.
+        </p>
+
+        <h2>Proč výška často funguje lépe než věk</h2>
+        <p>
+            Děti stejného věku mohou mít výrazně rozdílnou výšku, a tím i jiné proporce.
+            Proto je výška praktický „kotvící“ údaj. Zobrazený <strong>věk</strong> je orientační (přibližně pro 50. percentil).
+            Růst není lineární a zejména v pubertě se proporce mění rychleji.
+        </p>
+
+        <h2>Zdroj dat a poznámka</h2>
+        <p>
+            Údaje vycházejí z veřejně dostupných percentilových růstových grafů <strong>Státního zdravotního ústavu (SZÚ ČR)</strong>
+            (CAV 2001, Grant IGA MZ ČR NJ/6792-3/2001). Tento přehled je informační a orientační – nejde o zdravotní ani diagnostický nástroj.
+        </p>
+    </div>
+
+<div class="footer">Zdroj: Státní zdravotní ústav, CAV 2001 https://szu.gov.cz/publikace-szu/data/hodnoceni-rustu-a-vyvoje/. Pro výšku >170cm použita data pro 16-18 let.</div>
 </div>
 
 <script>
