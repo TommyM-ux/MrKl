@@ -13,7 +13,7 @@
         }
         body { font-family: system-ui, -apple-system, sans-serif; background: #f3f4f6; padding: 20px; color: var(--text); }
         .widget { max-width: 950px; margin: 0 auto; background: var(--bg); border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid var(--line); }
-        .header {padding: 24px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;}
+        .header {vpadding: 24px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;}
         .toggle-group { display: flex; background: var(--card); padding: 4px; border-radius: 12px; border: 1px solid var(--line); }
         .toggle-btn { border: none; background: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; color: var(--muted); }
         .toggle-btn.active { background: #fff; color: var(--text); box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
@@ -24,7 +24,6 @@
         .visual-area { padding: 20px; display: flex; flex-direction: column; align-items: center; border-right: 1px solid var(--line); background: #fff; }
         .figure-box { position: relative; height: 450px; width: 250px; display: flex; align-items: center; justify-content: center; }
         .figure-img { max-height: 95%; width: auto; opacity: 0.9; }
-.figure-box img{width:100%;height:100%;object-fit:contain;object-position:center bottom;display:block;}
         .measure-line { position: absolute; border-top: 2px dashed var(--primary); display: none; pointer-events: none; z-index: 10; transition: all 0.2s; }
         #line-arm { border-top-style: solid; border-top-width: 3px; }
         .table-area { padding: 24px; overflow-x: auto; }
@@ -43,7 +42,7 @@
 
         /* Brand + typography */
         .brand { display:flex; gap:14px; align-items:center; min-width: 280px; }
-        .brand-logo {width: 46px; height: auto; opacity: 0.85;}
+        .brand-logo {width: 56px; height: 56px; opacity: 0.95; filter: drop-shadow(0 2px 6px rgba(0,0,0,.08));}
         .brand-text h1 { margin:0; font-size: 22px; letter-spacing: -0.02em; }
         .brand-text p { margin:6px 0 0; color: var(--muted); font-size: 13px; }
 
@@ -104,7 +103,7 @@
         .header-left h1{ margin:0; font-size: 28px; letter-spacing:-0.02em; }
         .header-left p{ margin:6px 0 0; color: var(--muted); font-size: 14px; }
 
-        .brand-logo{ width:36px; height:36px; opacity:0.9; }
+        .brand-logo {width: 56px; height: 56px; opacity: 0.95; filter: drop-shadow(0 2px 6px rgba(0,0,0,.08));}
 
         .intro{
             padding: 18px 24px 10px;
@@ -127,31 +126,20 @@
         .controls .scale-track{ padding:0; margin:0; border:0; flex:1 1 520px; }
         .controls .toggle-group{ margin:0; }
 
-        .widget::after{
-            content:"";
-            position:absolute;
-            top:18px;
-            right:18px;
-            width:84px;
-            height:84px;
-            background:url("mistr-fin-kulate.webp") no-repeat center/contain;
-            opacity:0.05;
+        /* Watermark podpis pod tabulkou */
+        .table-watermark{
+            display:flex;
+            justify-content:flex-end;
+            padding-top:18px;
             pointer-events:none;
+            user-select:none;
+        }
+        .table-watermark img{
+            width:140px;
+            height:auto;
+            opacity:0.06;
             filter: grayscale(1);
         }
-    
-        .table-mark{
-            display:flex;
-            align-items:center;
-            gap:8px;
-            justify-content:flex-end;
-            padding:10px 2px 0;
-            color: var(--muted);
-            font-size: 12px;
-            user-select:none;
-            opacity: .85;
-        }
-        .table-mark img{ display:block; opacity:.75; }
 
     </style>
 </head>
@@ -166,7 +154,7 @@
         </div>
 
         <!-- Logo vpravo (malé, nenápadné). Vyměň src za svou cestu. -->
-        <img class="brand-logo" src="mistr-fin-kulate.webp" alt="Mistr Klubíčko" width="45" height="48">
+        <img class="brand-logo" src="mistr-fin-kulate.webp" alt="Mistr Klubíčko" width="56" height="56">
     </div>
 
     <div class="intro">
@@ -208,19 +196,19 @@
                 <thead><tr><th>Míra (cm)</th><th>Drobná (25%)</th><th>Průměrná (50%)</th><th>Robustní (75%)</th></tr></thead>
                 <tbody id="tableBody"></tbody>
             </table>
-        </div>
-    
-            <div class="table-mark" aria-hidden="true">
-                <img src="mistr-fin-kulate.webp" alt="" width="26" height="26">
-                <span>Mr Klubíčko • vizualizace</span>
+        
+            <div class="table-watermark" aria-hidden="true">
+                <img src="mistr-fin-kulate.webp" alt="">
             </div>
 </div>
+    </div>
     
     <div class="content">
         <h2>Jak číst tabulku</h2>
         <p>
             Tabulka zobrazuje orientační rozměry dětské postavy podle zvolené tělesné výšky.
-            Rozměry lze využít pro různé účely (oblečení, pomůcky i obecnou orientaci). Sloupce <strong>Drobná / Průměrná / Robustní</strong> (postava) odpovídají přibližně 25., 50. a 75. percentilu populace.
+            Rozměry lze využít pro 
+            Sloupce <strong>Drobná / Průměrná / Robustní</strong> (postava) odpovídají přibližně 25., 50. a 75. percentilu populace.
             Nejde o hodnocení postavy dítěte – jen o statistické srovnání.
         </p>
 
@@ -238,18 +226,15 @@
         </p>
     </div>
 
-<div class="footer">Zdroj: Státní zdravotní ústav, CAV 2001 (SZÚ). Pro výšku >170cm použita data pro 16-18 let.</div>
+<div class="footer">Zdroj: Státní zdravotní ústav, CAV 2001 (url:https://szu.gov.cz/publikace-szu/data/hodnoceni-rustu-a-vyvoje/). Pro výšku >170cm použita data pro 16-18 let.</div>
 </div>
 
 <script>
 // Konfigurace poloh čar pro různé siluety (v % odshora a zleva)
-// Pozn.: procenta se vztahují ke kontejneru .figure-box, proto je důležité mít stabilní vykreslení obrázku (object-fit: contain; object-position: center bottom).
-// Konfigurace poloh čar pro různé siluety (v % odshora a zleva)
-// Pozn.: procenta se vztahují ke kontejneru .figure-box, proto je důležité mít stabilní vykreslení obrázku.
 const LINE_CONFIGS = {
-  male:  { head:{top:14,left:30,width:35}, arm:{top:34,left:27,width:12}, belly:{top:44,left:29,width:36}, hips:{top:52,left:28,width:39} },
-  girls: { head:{top:12,left:40,width:25}, arm:{top:35,left:27,width:10}, belly:{top:44,left:30,width:35}, hips:{top:54,left:30,width:38} },
-  boys:  { head:{top:12,left:30,width:28}, arm:{top:34,left:23,width:10}, belly:{top:42,left:26,width:36}, hips:{top:52,left:27,width:36} }
+    male:  { head: {top:14, left:30, width:35}, arm: {top:34, left:27, width:12}, belly: {top:44, left:29, width:36}, hips: {top:52, left:28, width:39} },
+    girls: { head: {top:12, left:40, width:25}, arm: {top:35, left:27, width:10}, belly: {top:44, left:30, width:35}, hips: {top:54, left:30, width:38} },
+    boys:  { head: {top:12, left:30, width:28}, arm: {top:34, left:23, width:10}, belly: {top:42, left:26, width:36, hips: {top:52, left:27, width:36} }
 };
 
 const DATA = {
