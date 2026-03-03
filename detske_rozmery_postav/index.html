@@ -116,8 +116,13 @@ function render() {
 function updateHeight(h) { state.height = h; render(); }
 function showLine(id) { hideLines(); const el = document.getElementById('line-' + id); if(el) el.style.display = 'block'; }
 function hideLines() { document.querySelectorAll('.measure-line').forEach(l => l.style.display = 'none'); }
-document.getElementById('sexToggle').onclick = (e) => { if(e.target.dataset.sex) { state.sex = e.target.dataset.sex; render(); } };
-render();
+document.getElementById('sexToggle').onclick = (e) => {
+    const btn = e.target.closest('.toggle-btn'); // Najde tlačítko, i když klikneš na kraj
+    if (btn && btn.dataset.sex) {
+        state.sex = btn.dataset.sex; // Tady se změní pohlaví v datech
+        render(); // Tohle překreslí tabulku i obrázek
+    }
+};
 </script>
 </body>
 </html>
