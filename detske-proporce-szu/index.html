@@ -13,6 +13,310 @@
         }
         body { font-family: system-ui, -apple-system, sans-serif; background: #f3f4f6; padding: 20px; color: var(--text); }
         .widget { max-width: 950px; margin: 0 auto; background: var(--bg); border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid var(--line); }
+        .header {padding: 24px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;}
+        .toggle-group { display: flex; background: var(--card); padding: 4px; border-radius: 12px; border: 1px solid var(--line); }
+        .toggle-btn { border: none; background: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; color: var(--muted); }
+        .toggle-btn.active { background: #fff; color: var(--text); box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .scale-track { display: flex; gap: 8px; overflow-x: auto; padding: 15px 24px; background: var(--card); border-bottom: 1px solid var(--line); scrollbar-width: thin; }
+        .height-chip { flex: 0 0 auto; padding: 8px 14px; border-radius: 8px; border: 1px solid var(--line); background: #fff; cursor: pointer; font-size: 14px; }
+        .height-chip.active { border-color: var(--primary); background: #eff6ff; color: var(--primary); font-weight: bold; }
+        .main-layout { display: grid; grid-template-columns: 350px 1fr; }
+        .visual-area { padding: 20px; display: flex; flex-direction: column; align-items: center; border-right: 1px solid var(--line); background: #fff; }
+        .figure-box { position: relative; height: 450px; width: 250px; display: flex; align-items: center; justify-content: center; }
+        .figure-img { max-height: 95%; width: auto; opacity: 0.9; }
+        .measure-line { position: absolute; border-top: 2px dashed var(--primary); display: none; pointer-events: none; z-index: 10; transition: all 0.2s; }
+        #line-arm { border-top-style: solid; border-top-width: 3px; }
+        .table-area { padding: 24px; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; font-size: 11px; text-transform: uppercase; color: var(--muted); padding: 12px; background: var(--card); }
+        td { padding: 14px 12px; border-bottom: 1px solid var(--line); font-size: 15px; }
+        tr:hover { background: #f8fafc; }
+        .pill { padding: 4px 10px; border-radius: 99px; font-weight: 600; font-size: 13px; border: 1px solid transparent; box-shadow: 0 1px 2px rgba(0,0,0,0.05) }
+        .pill-slim { background: #eff6ff; color: var(--primary); border-color: #dbeafe; }
+        .pill-avg { background: #f0fdf4; color: var(--avg); border-color: #dcfce7; }
+        .pill-robust { background: #fff7ed; color: var(--robust); border-color: #ffedd5; }
+        .footer { padding: 16px 24px; background: var(--card); font-size: 12px; color: var(--muted); }
+        @media (max-width: 768px) { .main-layout { grid-template-columns: 1fr; } .visual-area { border-right: none; } }
+    
+
+
+        /* Brand + typography */
+        .brand { display:flex; gap:14px; align-items:center; min-width: 280px; }
+        .brand-logo {width: 36px; height: auto; opacity: 0.85;}
+        .brand-text h1 { margin:0; font-size: 22px; letter-spacing: -0.02em; }
+        .brand-text p { margin:6px 0 0; color: var(--muted); font-size: 13px; }
+
+        /* Layout polish */
+        body { background: radial-gradient(1000px 600px at 20% 0%, rgba(37,99,235,0.06), transparent 60%),
+                         radial-gradient(800px 500px at 90% 10%, rgba(249,115,22,0.05), transparent 55%),
+                         #f3f4f6; }
+        .header { gap: 14px; }
+        .scale-track { background: #fbfbfc; }
+
+        /* Content section */
+        .content {
+            padding: 26px 24px 30px;
+            border-top: 1px solid var(--line);
+            background: linear-gradient(#fff, #fff) padding-box,
+                        linear-gradient(to bottom, rgba(0,0,0,0.02), rgba(0,0,0,0)) border-box;
+        }
+        .content h2 {
+            font-size: 18px;
+            margin: 18px 0 10px;
+            letter-spacing: -0.01em;
+        }
+        .content h2:first-child { margin-top: 0; }
+        .content p {
+            margin: 0 0 10px;
+            max-width: 78ch;
+            color: #1f2937;
+            line-height: 1.65;
+        }
+
+        .footer {
+            display:flex;
+            gap: 10px;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            font-size: 12px;
+            line-height: 1.45;
+            color: var(--muted);
+            background: #fbfbfc;
+        }
+
+        /* Better mobile wrapping */
+        @media (max-width: 720px) {
+            .brand { width: 100%; }
+            .brand-text h1 { font-size: 20px; }
+        }
+    
+    
+        .intro{
+            padding: 18px 24px 6px;
+            background: #fff;
+            border-bottom: 1px solid var(--line);
+        }
+        .intro h2{
+            font-size: 18px;
+            margin: 0 0 10px;
+            letter-spacing: -0.01em;
+        }
+        .intro p{
+            margin: 0 0 10px;
+            max-width: 82ch;
+            line-height: 1.65;
+            color: #1f2937;
+        }
+        .brand-text h1 { font-size: 26px; }
+
+    
+        /* Jemný watermark loga vpravo nahoře */
+        .widget{ position: relative; }
+        .widget::after{
+            content:"";
+            position:absolute;
+            top:18px;
+            right:18px;
+            width:84px;
+            height:84px;
+            background:url("mistr-fin-kulate.webp") no-repeat center/contain;
+            opacity:0.05;
+            pointer-events:none;
+            filter: grayscale(1);
+        }
+
+        /* Stabilizace vykreslení siluety v boxu */
+        .figure-box img{
+            width:100%;
+            height:100%;
+            object-fit:contain;
+            object-position:center bottom;
+            display:block;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="widget">
+    
+    <div class="header">
+        <div class="brand">
+            <!-- Nahraď cestu src svým logem (SVG/PNG). Doporučení: ~28–36px výška. -->
+            <img class="brand-logo" src="mistr-fin-kulate.webp" alt="Mistr Klubíčko" width="36" height="36">
+            <div class="brand-text">
+                <h1>Dětské a juniorské proporce těla současné populace</h1>
+                <p>Data SZÚ ČR (percentilové grafy) • orientační hodnoty</p>
+            </div>
+        </div>
+
+        <div class="toggle-group" id="sexToggle" aria-label="Pohlaví">
+            <button class="toggle-btn active" data-sex="girls" type="button">Dívka</button>
+            <button class="toggle-btn" data-sex="boys" type="button">Chlapec</button>
+        </div>
+    </div>
+
+    <div class="intro">
+        <h2>Proč tento přehled vznikl</h2>
+        <p>
+            Při tvorbě velikostních tabulek jsme zjistili, že univerzální čísla často nestačí.
+            Děti rostou různě rychle a jejich proporce se mohou lišit víc, než by odpovídalo samotnému věku.
+            Proto jsme sestavili tento přehled, který pomáhá rychle porovnat běžné rozmezí rozměrů podle výšky.
+        </p>
+        <p>
+            Najdeš tu orientační hodnoty obvodu hlavy, paže, břicha a boků – praktické míry pro různé účely (oblečení, pomůcky, obecná orientace).
+            Cílem není hodnotit děti, ale nabídnout přehledný a srozumitelný pohled na variabilitu dětské postavy v současné populaci.
+        </p>
+    </div>
+
+    <div class="scale-track" id="heightTrack"></div>
+" id="sexToggle" aria-label="Pohlaví">
+            <button class="toggle-btn active" data-sex="girls" type="button">Dívka</button>
+            <button class="toggle-btn" data-sex="boys" type="button">Chlapec</button>
+        </div>
+    </div>
+    <div class="main-layout">
+        <div class="visual-area">
+            <div class="figure-box" id="figureBox">
+                <div id="line-head" class="measure-line"></div>
+                <div id="line-arm" class="measure-line"></div>
+                <div id="line-belly" class="measure-line"></div>
+                <div id="line-hips" class="measure-line"></div>
+                <img src="silueta_holka.png" id="mainFigure" class="figure-img">
+            </div>
+            <div id="ageLabel" style="margin-top: 20px; font-weight: bold; color: var(--primary); font-size: 1.2em;">Věk: —</div>
+        </div>
+        <div class="table-area">
+            <table>
+                <thead><tr><th>Míra (cm)</th><th>Drobná (25%)</th><th>Průměrná (50%)</th><th>Robustní (75%)</th></tr></thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="content">
+        <h2>Jak číst tabulku</h2>
+        <p>
+            Tabulka zobrazuje orientační rozměry dětské postavy podle zvolené tělesné výšky.
+            Sloupce <strong>Drobná / Průměrná / Robustní</strong> (postava) odpovídají přibližně 25., 50. a 75. percentilu populace.
+            Nejde o hodnocení postavy dítěte – jen o statistické srovnání.
+        </p>
+
+        <h2>Proč výška často funguje lépe než věk</h2>
+        <p>
+            Děti stejného věku mohou mít výrazně rozdílnou výšku, a tím i jiné proporce.
+            Proto je výška praktický „kotvící“ údaj. Zobrazený <strong>věk</strong> je orientační (přibližně pro 50. percentil).
+            Růst není lineární a zejména v pubertě se proporce mění rychleji a více.
+        </p>
+
+        <h2>Zdroj dat a poznámka</h2>
+        <p>
+            Údaje vycházejí z veřejně dostupných percentilových růstových grafů <strong>Státního zdravotního ústavu (SZÚ ČR)</strong>
+            (CAV 2001, Grant IGA MZ ČR NJ/6792-3/2001). Tento přehled je informační a orientační – nejde o zdravotní ani diagnostický nástroj.
+        </p>
+    </div>
+
+<div class="footer">Zdroj: Státní zdravotní ústav, CAV 2001 (SZÚ). Pro výšku >170cm použita data pro 16-18 let.</div>
+</div>
+
+<script>
+// Konfigurace poloh čar pro různé siluety (v % odshora a zleva)
+const LINE_CONFIGS = {
+  girls: {
+    head:  { top: 14, left: 28, width: 36 },
+    arm:   { top: 36, left: 23, width: 18 },
+    belly: { top: 44, left: 20, width: 50 },
+    hips:  { top: 56, left: 17, width: 60 }
+  },
+  boys: {
+    head:  { top: 13, left: 28, width: 36 },
+    arm:   { top: 35, left: 21, width: 20 },
+    belly: { top: 45, left: 20, width: 52 },
+    hips:  { top: 57, left: 17, width: 62 }
+  },
+  male: { // malé dítě / unisex (silueta_male.png)
+    head:  { top: 15, left: 27, width: 38 },
+    arm:   { top: 38, left: 23, width: 20 },
+    belly: { top: 46, left: 20, width: 55 },
+    hips:  { top: 55, left: 17, width: 65 }
+  }
+};
+
+const DATA = {
+    98:  { age: "3 roky", girls: { "Obvod hlavy": [48.3, 49.2, 50.1, "head"], "Obvod paže": [15.2, 16.1, 17.2, "arm"], "Obvod břicha": [47.5, 50.0, 53.0, "belly"], "Obvod boků": [52.0, 55.0, 58.5, "hips"] }, boys: { "Obvod hlavy": [49.2, 50.2, 51.2, "head"], "Obvod paže": [15.5, 16.4, 17.6, "arm"], "Obvod břicha": [48.5, 51.0, 54.0, "belly"], "Obvod boků": [51.5, 54.0, 57.5, "hips"] } },
+    110: { age: "5 let", girls: { "Obvod hlavy": [49.8, 50.8, 51.8, "head"], "Obvod paže": [16.2, 17.2, 18.6, "arm"], "Obvod břicha": [50.0, 53.0, 56.5, "belly"], "Obvod boků": [56.5, 60.0, 64.5, "hips"] }, boys: { "Obvod hlavy": [50.8, 51.8, 52.8, "head"], "Obvod paže": [16.6, 17.6, 19.1, "arm"], "Obvod břicha": [51.0, 54.0, 57.5, "belly"], "Obvod boků": [55.5, 59.0, 63.0, "hips"] } },
+    128: { age: "8 let", girls: { "Obvod hlavy": [51.5, 52.5, 53.5, "head"], "Obvod paže": [17.8, 19.2, 21.0, "arm"], "Obvod břicha": [54.0, 58.0, 63.0, "belly"], "Obvod boků": [63.0, 67.5, 73.5, "hips"] }, boys: { "Obvod hlavy": [52.4, 53.4, 54.4, "head"], "Obvod paže": [18.2, 19.5, 21.5, "arm"], "Obvod břicha": [55.0, 59.0, 64.0, "belly"], "Obvod boků": [62.5, 66.5, 72.0, "hips"] } },
+    140: { age: "10 let", girls: { "Obvod hlavy": [52.3, 53.3, 54.3, "head"], "Obvod paže": [19.2, 21.2, 23.8, "arm"], "Obvod břicha": [57.5, 62.0, 68.0, "belly"], "Obvod boků": [70.0, 76.0, 83.5, "hips"] }, boys: { "Obvod hlavy": [53.2, 54.2, 55.2, "head"], "Obvod paže": [19.8, 21.5, 24.2, "arm"], "Obvod břicha": [58.5, 63.0, 69.5, "belly"], "Obvod boků": [68.5, 74.5, 81.5, "hips"] } },
+    152: { age: "12 let", girls: { "Obvod hlavy": [53.0, 54.0, 55.0, "head"], "Obvod paže": [21.2, 23.5, 26.8, "arm"], "Obvod břicha": [61.0, 66.5, 73.5, "belly"], "Obvod boků": [78.0, 85.0, 93.0, "hips"] }, boys: { "Obvod hlavy": [54.2, 55.2, 56.5, "head"], "Obvod paže": [21.2, 23.8, 27.2, "arm"], "Obvod břicha": [62.5, 68.0, 75.5, "belly"], "Obvod boků": [75.5, 82.5, 90.5, "hips"] } },
+    164: { age: "14 let", girls: { "Obvod hlavy": [53.6, 54.6, 55.6, "head"], "Obvod paže": [23.0, 25.8, 29.5, "arm"], "Obvod břicha": [65.0, 71.5, 79.5, "belly"], "Obvod boků": [86.0, 93.0, 101.5, "hips"] }, boys: { "Obvod hlavy": [55.2, 56.4, 57.8, "head"], "Obvod paže": [23.2, 26.2, 30.2, "arm"], "Obvod břicha": [67.5, 74.0, 83.0, "belly"], "Obvod boků": [83.0, 90.5, 99.0, "hips"] } },
+    174: { age: "16+ let", girls: { "Obvod hlavy": [54.2, 55.2, 56.2, "head"], "Obvod paže": [24.5, 27.0, 30.5, "arm"], "Obvod břicha": [68.0, 74.0, 82.5, "belly"], "Obvod boků": [91.0, 97.5, 106.0, "hips"] }, boys: { "Obvod hlavy": [56.5, 57.5, 58.8, "head"], "Obvod paže": [26.0, 29.0, 32.5, "arm"], "Obvod břicha": [71.5, 78.5, 87.0, "belly"], "Obvod boků": [89.5, 96.0, 104.5, "hips"] } }
+};
+
+let state = { sex: 'girls', height: 128 };
+
+function render() {
+    const track = document.getElementById('heightTrack');
+    track.innerHTML = Object.keys(DATA).map(h => `<div class="height-chip ${+h === state.height ? 'active' : ''}" onclick="updateHeight(${h})">${h} cm</div>`).join('');
+
+    const unit = DATA[state.height];
+    const measures = unit[state.sex];
+    document.getElementById('ageLabel').textContent = `Věk: ${unit.age}`;
+    
+    document.getElementById('tableBody').innerHTML = Object.entries(measures).map(([name, vals]) => `
+        <tr onmouseenter="showLine('${vals[3]}')" onmouseleave="hideLines()">
+            <td>${name}</td>
+            <td><span class="pill pill-slim">${vals[0]}</span></td>
+            <td><span class="pill pill-avg">${vals[1]}</span></td>
+            <td><span class="pill pill-robust">${vals[2]}</span></td>
+        </tr>
+    `).join('');
+
+    document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.sex === state.sex));
+    
+    // Určení typu postavy pro polohování čar
+    let figureType = state.sex;
+    if (state.height <= 110) figureType = 'male';
+    
+    const img = document.getElementById('mainFigure');
+    img.src = figureType === 'male' ? 'silueta_male.png' : (state.sex === 'girls' ? 'silueta_holka.png' : 'silueta_kluk.png');
+
+    // Aktualizace pozic čar podle typu postavy
+    const cfg = LINE_CONFIGS[figureType];
+    Object.keys(cfg).forEach(key => {
+        const line = document.getElementById('line-' + key);
+        line.style.top = cfg[key].top + '%';
+        line.style.left = cfg[key].left + '%';
+        line.style.width = cfg[key].width + '%';
+    });
+}
+
+function updateHeight(h) { state.height = h; render(); }
+function showLine(id) { hideLines(); const el = document.getElementById('line-' + id); if(el) el.style.display = 'block'; }
+function hideLines() { document.querySelectorAll('.measure-line').forEach(l => l.style.display = 'none'); }
+
+document.getElementById('sexToggle').onclick = (e) => { 
+    if(e.target.dataset.sex) { state.sex = e.target.dataset.sex; render(); } 
+};
+
+render();
+</script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Přehled dětských proporcí podle výšky a věku. Orientační obvod hlavy, paže, břicha a boků podle percentilových grafů SZÚ ČR.">
+    <title>Dětské proporce podle výšky a věku | Percentilová tabulka SZÚ</title>
+    <style>
+        :root {
+            --primary: #2563eb; --avg: #16a34a; --robust: #f97316;
+            --bg: #ffffff; --card: #f9fafb; --line: #e5e7eb;
+            --text: #111827; --muted: #6b7280;
+        }
+        body { font-family: system-ui, -apple-system, sans-serif; background: #f3f4f6; padding: 20px; color: var(--text); }
+        .widget { max-width: 950px; margin: 0 auto; background: var(--bg); border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid var(--line); }
         .header {vpadding: 24px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;}
         .toggle-group { display: flex; background: var(--card); padding: 4px; border-radius: 12px; border: 1px solid var(--line); }
         .toggle-btn { border: none; background: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; color: var(--muted); }
