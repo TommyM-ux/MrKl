@@ -23,22 +23,23 @@
         .height-chip.active { border-color: var(--primary); background: #eff6ff; color: var(--primary); font-weight: bold; }
         .main-layout { display: grid; grid-template-columns: 350px 1fr; }
         .visual-area { padding: 20px; display: flex; flex-direction: column; align-items: center; border-right: 1px solid var(--line); background: #fff; }
-        .figure-box { 
-    position: relative; 
-    width: 100%;           /* Roztáhne se podle kontejneru */
-    max-width: 250px;      /* Ale ne víc než tvých laděných 250px */
-    height: auto;          /* Výška se dopočítá podle obrázku */
-    aspect-ratio: 250 / 450; /* Drží poměr stran, na který jsi to ladil */
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
+        .figure-box {
+    position: relative;
+    height: 450px; /* Tohle je tvoje kotva pro pixely */
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible; /* Aby čáry mohly kousek vykukovat, pokud chceš */
     margin: 0 auto;
 }
-        .figure-img { 
-    width: 100%; 
-    height: auto; 
-    display: block;
-    opacity: 0.9; 
+        .figure-img {
+    max-height: 100%; /* Nikdy nebude vyšší než box */
+    max-width: 100%;  /* Nikdy nebude širší než box */
+    width: auto;
+    height: auto;
+    opacity: 0.9;
+    object-fit: contain; /* Udrží proporce postavy */
 }
         .measure-line { 
     position: absolute; 
