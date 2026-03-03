@@ -5,35 +5,46 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.2/iframeResizer.contentWindow.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        :root {
-            --primary: #2563eb; --avg: #16a34a; --robust: #f97316;
-            --bg: #ffffff; --card: #f9fafb; --line: #6d5fa7;
-            --text: #111827; --muted: #6b7280;
-        }
-        body { font-family: system-ui, -apple-system, sans-serif; background: transparent; padding: 0; margin: 0; color: var(--text); overflow: hidden; }
-        .widget { max-width: 950px; margin: 0 auto; background: var(--bg); border-radius: 20px; overflow: hidden; border: 1px solid var(--line); }
-        
-        /* SKRYTÍ TEXTŮ PRO GOOGLE (budou přímo v Upgates) */
-        .header, .intro, .content, .footer { display: none !important; }
+        /* Vraťme tomu původní styl a jiskru */
+:root {
+    --primary: #2563eb; --avg: #16a34a; --robust: #f97316;
+    --bg: #ffffff; --card: #f9fafb; --line: #6d5fa7;
+    --text: #111827; --muted: #6b7280;
+}
+body { font-family: system-ui, -apple-system, sans-serif; background: transparent; padding: 0; margin: 0; color: var(--text); }
 
-        .controls { padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; border-bottom: 1px solid var(--line); background: #fff; }
-        .scale-track { display: flex; gap: 6px; overflow-x: auto; flex: 1; padding: 5px 0; }
-        .height-chip { flex: 0 0 auto; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--line); background: #fff; cursor: pointer; font-size: 13px; }
-        .height-chip.active { border-color: var(--primary); background: #eff6ff; color: var(--primary); font-weight: bold; }
-        
-        .toggle-group { display: flex; background: var(--card); padding: 4px; border-radius: 12px; border: 1px solid var(--line); }
-        .toggle-btn { border: none; background: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; color: var(--muted); }
-        .toggle-btn.active { background: #fff; color: var(--text); box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+/* Widget se stínem jako u originálu */
+.widget { 
+    max-width: 950px; 
+    margin: 10px auto; 
+    background: var(--bg); 
+    border-radius: 20px; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05); /* Tenhle stín ti chyběl */
+    overflow: hidden; 
+    border: 1px solid var(--line); 
+}
 
-        .main-layout { display: grid; grid-template-columns: 350px 1fr; }
-        .visual-area { padding: 20px; display: flex; flex-direction: column; align-items: center; border-right: 1px solid var(--line); background: #fff; }
-        
-        /* FIXACE POSTAVIČKY */
-        .figure-box { position: relative; height: 450px; width: 250px; display: flex; align-items: center; justify-content: center; margin: 0 auto; }
-        .figure-img { max-height: 100%; width: auto; opacity: 0.9; }
-        
-        .measure-line { position: absolute; border-top: 3px dashed #ee6e62; display: none; pointer-events: none; z-index: 10; }
-        
+/* Skrytí textů, které budou v Upgates (pro SEO) */
+.header, .intro, .content, .footer { display: none !important; }
+
+/* Ovládací prvky a tabulka */
+.controls { padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; border-bottom: 1px solid var(--line); background: #fff; }
+.scale-track { display: flex; gap: 6px; overflow-x: auto; flex: 1; padding: 5px 0; }
+.height-chip { flex: 0 0 auto; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--line); background: #fff; cursor: pointer; font-size: 13px; }
+.height-chip.active { border-color: var(--primary); background: #eff6ff; color: var(--primary); font-weight: bold; }
+
+/* Postavička a čáry - Vyladění na milimetr */
+.figure-box { position: relative; height: 450px; width: 250px; display: flex; align-items: center; justify-content: center; margin: 0 auto; }
+.figure-img { max-height: 95%; width: auto; opacity: 0.9; }
+
+/* Čára, která na tebe "vyskočila" - teď bude sedět */
+.measure-line { 
+    position: absolute; 
+    border-top: 3px solid #ee6e62; /* Původní plná tlustá čára */
+    display: none; 
+    pointer-events: none; 
+    z-index: 10; 
+}        
         .table-area { padding: 24px; overflow-x: auto; }
         table { width: 100%; border-collapse: collapse; }
         th { text-align: left; font-size: 11px; text-transform: uppercase; color: var(--muted); padding: 12px; background: var(--card); }
