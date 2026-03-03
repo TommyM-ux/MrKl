@@ -21,8 +21,20 @@
         .scale-track { display: flex; gap: 6px; overflow-x: auto; flex: 1; padding: 5px 0; }
         .height-chip { flex: 0 0 auto; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--line); background: #fff; cursor: pointer; font-size: 13px; }
         .height-chip.active { border-color: var(--primary); background: #eff6ff; color: var(--primary); font-weight: bold; }
-        .toggle-group { display: flex; background: var(--card); padding: 4px; border-radius: 12px; border: 1px solid var(--line); }
-        .toggle-btn { border: none; background: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; color: var(--muted); }
+        .toggle-group {display: flex;     background: var(--card);     padding: 3px;         /* Zmenšený vnitřní okraj */
+    border-radius: 10px;  /* Trochu ostřejší rohy pro moderní vzhled */
+    border: 1px solid var(--line);
+    flex-shrink: 0;       /* Nedovolí skupině se deformovat */
+}
+
+.toggle-btn { border: none; background: none; padding: 6px 12px;    /* Tady je to kouzlo - zmenšil jsem padding z 8/16 na 6/12 */
+    border-radius: 7px; 
+    cursor: pointer; 
+    font-weight: 600; 
+    color: var(--muted); 
+    font-size: 13px;      /* Trochu menší písmo, aby to ladilo */
+    transition: all 0.2s; /* Aby to hezky bliklo při přepnutí */
+}
         .toggle-btn.active { background: #fff; color: var(--text); box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         .main-layout { display: grid; grid-template-columns: 350px 1fr; }
         .visual-area { padding: 20px; display: flex; flex-direction: column; align-items: center; border-right: 1px solid var(--line); background: #fff; }
