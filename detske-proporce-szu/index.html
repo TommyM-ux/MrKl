@@ -156,15 +156,15 @@
         <p>
             Tabulka zobrazuje orientační rozměry dětské postavy podle zvolené tělesné výšky.
             Rozměry lze využít pro 
-            Sloupce <strong>Drobná / Průměrná / Robustní</strong> odpovídají přibližně 25., 50. a 75. percentilu populace.
-            Nejde o hodnocení dítěte – jen o statistické srovnání.
+            Sloupce <strong>Drobná / Průměrná / Robustní</strong> (postava) odpovídají přibližně 25., 50. a 75. percentilu populace.
+            Nejde o hodnocení postavy dítěte – jen o statistické srovnání.
         </p>
 
         <h2>Proč výška často funguje lépe než věk</h2>
         <p>
             Děti stejného věku mohou mít výrazně rozdílnou výšku, a tím i jiné proporce.
             Proto je výška praktický „kotvící“ údaj. Zobrazený <strong>věk</strong> je orientační (přibližně pro 50. percentil).
-            Růst není lineární a zejména v pubertě se proporce mění rychleji.
+            Růst není lineární a zejména v pubertě se proporce mění rychleji a více.
         </p>
 
         <h2>Zdroj dat a poznámka</h2>
@@ -174,15 +174,15 @@
         </p>
     </div>
 
-<div class="footer">Zdroj: Státní zdravotní ústav, CAV 2001 https://szu.gov.cz/publikace-szu/data/hodnoceni-rustu-a-vyvoje/. Pro výšku >170cm použita data pro 16-18 let.</div>
+<div class="footer">Zdroj: Státní zdravotní ústav, CAV 2001 (url:https://szu.gov.cz/publikace-szu/data/hodnoceni-rustu-a-vyvoje/). Pro výšku >170cm použita data pro 16-18 let.</div>
 </div>
 
 <script>
 // Konfigurace poloh čar pro různé siluety (v % odshora a zleva)
 const LINE_CONFIGS = {
     male:  { head: {top:12, left:25, width:45}, arm: {top:34, left:27, width:12}, belly: {top:44, left:15, width:65}, hips: {top:52, left:12, width:76} },
-    girls: { head: {top:12, left:25, width:40}, arm: {top:35, left:22, width:14}, belly: {top:41, left:15, width:60}, hips: {top:55, left:10, width:72} },
-    boys:  { head: {top:10, left:25, width:40}, arm: {top:34, left:18, width:14}, belly: {top:42, left:15, width:60}, hips: {top:55, left:10, width:72} }
+    girls: { head: {top:12, left:27, width:37}, arm: {top:35, left:24, width:12}, belly: {top:41, left:17, width:50}, hips: {top:55, left:14, width:58} },
+    boys:  { head: {top:12, left:25, width:36}, arm: {top:34, left:18, width:14}, belly: {top:42, left:15, width:60}, hips: {top:53, left:10, width:62} }
 };
 
 const DATA = {
