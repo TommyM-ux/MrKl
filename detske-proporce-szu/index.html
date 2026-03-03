@@ -8,7 +8,7 @@
     <style>
         :root {
             --primary: #2563eb; --avg: #16a34a; --robust: #f97316;
-            --bg: #ffffff; --card: #f9fafb; --line: #e5e7eb;
+            --bg: #ffffff; --card: #f9fafb; --line: #ee6e62;
             --text: #111827; --muted: #6b7280;
         }
         body { font-family: system-ui, -apple-system, sans-serif; background: #f3f4f6; padding: 20px; color: var(--text); }
@@ -235,9 +235,9 @@
 <script>
 // Konfigurace poloh čar pro různé siluety (v % odshora a zleva)
 const LINE_CONFIGS = {
-    male:  { head: {top:14, left:30, width:35}, arm: {top:34, left:27, width:12}, belly: {top:44, left:29, width:36}, hips: {top:52, left:28, width:39} },
-    girls: { head: {top:12, left:33, width:26}, arm: {top:35, left:28, width:10}, belly: {top:44, left:33, width:33}, hips: {top:54, left:30, width:38} },
-    boys:  { head: {top:12, left:30, width:28}, arm: {top:34, left:23, width:10}, belly: {top:42, left:26, width:36}, hips: {top:52, left:27, width:36} }
+    male:  { head: {top:14, left:30, width:35}, arm: {top:34, left:27, width:12}, belly: {top:44, left:30, width:34}, hips: {top:52, left:30, width:36} },
+    girls: { head: {top:12, left:35, width:26}, arm: {top:35, left:28, width:10}, belly: {top:44, left:33, width:33}, hips: {top:54, left:30, width:38} },
+    boys:  { head: {top:12, left:30, width:26}, arm: {top:34, left:23, width:10}, belly: {top:42, left:26, width:34}, hips: {top:52, left:27, width:36} }
 };
 
 const DATA = {
