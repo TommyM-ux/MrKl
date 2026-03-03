@@ -13,7 +13,7 @@
         }
         body { font-family: system-ui, -apple-system, sans-serif; background: #f3f4f6; padding: 20px; color: var(--text); }
         .widget { max-width: 950px; margin: 0 auto; background: var(--bg); border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid var(--line); }
-        .header {padding: 24px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;}
+        .header {vpadding: 24px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;}
         .toggle-group { display: flex; background: var(--card); padding: 4px; border-radius: 12px; border: 1px solid var(--line); }
         .toggle-btn { border: none; background: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; color: var(--muted); }
         .toggle-btn.active { background: #fff; color: var(--text); box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
@@ -91,69 +91,54 @@
         }
     
     
+        /* --- layout tweaks (logo vpravo, přepínač u výšek) --- */
+        .header{
+            padding: 24px;
+            border-bottom: 1px solid var(--line);
+            display:flex;
+            align-items:flex-start;
+            justify-content:space-between;
+            gap:16px;
+        }
+        .header-left h1{ margin:0; font-size: 28px; letter-spacing:-0.02em; }
+        .header-left p{ margin:6px 0 0; color: var(--muted); font-size: 14px; }
+
+        .brand-logo{ width:36px; height:36px; opacity:0.9; }
+
         .intro{
-            padding: 18px 24px 6px;
-            background: #fff;
+            padding: 18px 24px 10px;
+            background:#fff;
             border-bottom: 1px solid var(--line);
         }
-        .intro h2{
-            font-size: 18px;
-            margin: 0 0 10px;
-            letter-spacing: -0.01em;
-        }
-        .intro p{
-            margin: 0 0 10px;
-            max-width: 82ch;
-            line-height: 1.65;
-            color: #1f2937;
-        }
-        .brand-text h1 { font-size: 26px; }
+        .intro h2{ margin:0 0 10px; font-size: 20px; letter-spacing:-0.01em; }
+        .intro p{ margin:0 0 10px; max-width: 90ch; line-height:1.7; color: var(--text); }
 
-    
-        /* Jemný watermark loga vpravo nahoře */
-        .widget{ position: relative; }
-        .widget::after{
-            content:"";
-            position:absolute;
-            top:18px;
-            right:18px;
-            width:84px;
-            height:84px;
-            background:url("mistr-fin-kulate.webp") no-repeat center/contain;
-            opacity:0.05;
-            pointer-events:none;
-            filter: grayscale(1);
+        .controls{
+            padding: 14px 24px 18px;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:14px;
+            flex-wrap:wrap;
+            border-bottom: 1px solid var(--line);
+            background:#fff;
         }
-
-        /* Stabilizace vykreslení siluety v boxu */
-        .figure-box img{
-            width:100%;
-            height:100%;
-            object-fit:contain;
-            object-position:center bottom;
-            display:block;
-        }
-
-    </style>
+        .controls .scale-track{ padding:0; margin:0; border:0; flex:1 1 520px; }
+        .controls .toggle-group{ margin:0; }
+</style>
 </head>
 <body>
 
 <div class="widget">
     
     <div class="header">
-        <div class="brand">
-            <!-- Nahraď cestu src svým logem (SVG/PNG). Doporučení: ~28–36px výška. -->
-            <img class="brand-logo" src="mistr-fin-kulate.webp" alt="Mistr Klubíčko" width="36" height="36">
-            <div class="brand-text">
-                <h1>Dětské a juniorské proporce těla současné populace</h1>
-                <p>Data SZÚ ČR (percentilové grafy) • orientační hodnoty</p>
-            </div>
+        <div class="header-left">
+            <h1>Dětské a juniorské proporce těla současné populace</h1>
+            <p>Data SZÚ ČR (percentilové grafy) • orientační hodnoty</p>
         </div>
 
-        <div class="toggle-group" id="sexToggle" aria-label="Pohlaví">
-            <button class="toggle-btn active" data-sex="girls" type="button">Dívka</button>
-            <button class="toggle-btn" data-sex="boys" type="button">Chlapec</button>
-        </div>
+        <!-- Logo vpravo (malé, nenápadné). Vyměň src za svou cestu. -->
+        <img class="brand-logo" src="mistr-fin-kulate.webp" alt="Mistr Klubíčko" width="36" height="36">
     </div>
 
     <div class="intro">
@@ -161,20 +146,24 @@
         <p>
             Při tvorbě velikostních tabulek jsme zjistili, že univerzální čísla často nestačí.
             Děti rostou různě rychle a jejich proporce se mohou lišit víc, než by odpovídalo samotnému věku.
-            Proto jsme sestavili tento přehled, který pomáhá rychle porovnat běžné rozmezí rozměrů podle výšky.
+            Proto jsme sestavili tento přehled, který pomáhá rychle porovnat běžné rozmezí rozměrů podle výšky a věku.
         </p>
         <p>
-            Najdeš tu orientační hodnoty obvodu hlavy, paže, břicha a boků – praktické míry pro různé účely (oblečení, pomůcky, obecná orientace).
-            Cílem není hodnotit děti, ale nabídnout přehledný a srozumitelný pohled na variabilitu dětské postavy v současné populaci.
+            Najdeš tu orientační hodnoty obvodu hlavy, paže, břicha a boků – praktické míry pro různé účely
+            např. pro oblečení, pomůcky i obecnou orientaci. Cílem není hodnotit děti, ale nabídnout přehledný a srozumitelný
+            pohled na variabilitu dětské postavy v současné populaci.
         </p>
     </div>
 
-    <div class="scale-track" id="heightTrack"></div>
-" id="sexToggle" aria-label="Pohlaví">
+    <div class="controls">
+        <div class="toggle-group" id="sexToggle" aria-label="Pohlaví">
             <button class="toggle-btn active" data-sex="girls" type="button">Dívka</button>
             <button class="toggle-btn" data-sex="boys" type="button">Chlapec</button>
         </div>
+
+        <div class="scale-track" id="heightTrack"></div>
     </div>
+
     <div class="main-layout">
         <div class="visual-area">
             <div class="figure-box" id="figureBox">
@@ -198,6 +187,7 @@
         <h2>Jak číst tabulku</h2>
         <p>
             Tabulka zobrazuje orientační rozměry dětské postavy podle zvolené tělesné výšky.
+            Rozměry lze využít pro 
             Sloupce <strong>Drobná / Průměrná / Robustní</strong> (postava) odpovídají přibližně 25., 50. a 75. percentilu populace.
             Nejde o hodnocení postavy dítěte – jen o statistické srovnání.
         </p>
@@ -216,30 +206,15 @@
         </p>
     </div>
 
-<div class="footer">Zdroj: Státní zdravotní ústav, CAV 2001 (SZÚ). Pro výšku >170cm použita data pro 16-18 let.</div>
+<div class="footer">Zdroj: Státní zdravotní ústav, CAV 2001 (url:https://szu.gov.cz/publikace-szu/data/hodnoceni-rustu-a-vyvoje/). Pro výšku >170cm použita data pro 16-18 let.</div>
 </div>
 
 <script>
 // Konfigurace poloh čar pro různé siluety (v % odshora a zleva)
 const LINE_CONFIGS = {
-  girls: {
-    head:  { top: 14, left: 28, width: 36 },
-    arm:   { top: 36, left: 23, width: 18 },
-    belly: { top: 44, left: 20, width: 50 },
-    hips:  { top: 56, left: 17, width: 60 }
-  },
-  boys: {
-    head:  { top: 13, left: 28, width: 36 },
-    arm:   { top: 35, left: 21, width: 20 },
-    belly: { top: 45, left: 20, width: 52 },
-    hips:  { top: 57, left: 17, width: 62 }
-  },
-  male: { // malé dítě / unisex (silueta_male.png)
-    head:  { top: 15, left: 27, width: 38 },
-    arm:   { top: 38, left: 23, width: 20 },
-    belly: { top: 46, left: 20, width: 55 },
-    hips:  { top: 55, left: 17, width: 65 }
-  }
+    male:  { head: {top:12, left:25, width:45}, arm: {top:34, left:27, width:12}, belly: {top:44, left:19, width:50}, hips: {top:52, left:15, width:52} },
+    girls: { head: {top:15, left:27, width:30}, arm: {top:35, left:27, width:10}, belly: {top:44, left:18, width:45}, hips: {top:56, left:18, width:40} },
+    boys:  { head: {top:15, left:25, width:30}, arm: {top:34, left:23, width:12}, belly: {top:42, left:18, width:45}, hips: {top:56, left:15, width:48} }
 };
 
 const DATA = {
