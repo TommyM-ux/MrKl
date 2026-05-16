@@ -154,11 +154,11 @@
     }
 
     #mk-sock-tool .mk-grid{
-      display:grid;
-      grid-template-columns:1.05fr 1.35fr;
-      gap:18px;
-      align-items:start;
-    }
+  display:grid;
+  grid-template-columns:290px minmax(0,1fr);
+  gap:14px;
+  align-items:start;
+}
 
     #mk-sock-tool .mk-result{
       background:#fff;
@@ -202,7 +202,7 @@
     }
 
     #mk-sock-tool .mk-metric{
-      padding:15px 14px;
+      padding:12px 11px;
       border-radius:20px;
       background:rgba(255,255,255,.78);
       border:1px solid rgba(230,222,211,.82);
@@ -217,7 +217,7 @@
     }
 
     #mk-sock-tool .mk-metric strong{
-      font-size:22px;
+      font-size:20px;
       color:#33434a;
     }
 
@@ -244,44 +244,43 @@
     }
 
     #mk-sock-tool table{
-      width:100%;
-      border-collapse:separate;
-      border-spacing:0;
-      min-width:720px;
-    }
+  width:100%;
+  table-layout:fixed;
+  border-collapse:separate;
+  border-spacing:0;
+  min-width:660px;
+}
 
-    #mk-sock-tool th{
-      background:#63b7b0;
-      color:#fff;
-      text-align:center;
-      padding:15px 12px;
-      font-size:13px;
-      line-height:1.25;
-      border-right:8px solid #fff;
-      vertical-align:middle;
-    }
+#mk-sock-tool th{
+  background:#63b7b0;
+  color:#fff;
+  text-align:center;
+  padding:11px 8px;
+  font-size:12px;
+  line-height:1.2;
+  border-right:6px solid #fff;
+  vertical-align:middle;
+}
 
-    #mk-sock-tool th:last-child{border-right:0;}
+#mk-sock-tool th small{
+  display:block;
+  opacity:.9;
+  font-size:10px;
+  font-style:italic;
+  font-weight:normal;
+  margin-top:2px;
+}
 
-    #mk-sock-tool th small{
-      display:block;
-      opacity:.9;
-      font-size:11px;
-      font-style:italic;
-      font-weight:normal;
-      margin-top:2px;
-    }
-
-    #mk-sock-tool td{
-      text-align:center;
-      padding:13px 12px;
-      border-right:8px solid #fff;
-      border-top:8px solid #fff;
-      background:#f3f0eb;
-      color:#26343a;
-      font-size:14px;
-      transition:.16s ease;
-    }
+#mk-sock-tool td{
+  text-align:center;
+  padding:10px 8px;
+  border-right:6px solid #fff;
+  border-top:6px solid #fff;
+  background:#f3f0eb;
+  color:#26343a;
+  font-size:13px;
+  transition:.16s ease;
+}
 
     #mk-sock-tool td:last-child{border-right:0;}
     #mk-sock-tool tr:nth-child(even) td{background:#faf7f1;}
