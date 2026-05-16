@@ -92,7 +92,21 @@
       justify-content:space-between;
       margin:20px 0 18px;
     }
+#mk-sock-tool .mk-brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  opacity:.82;
+  font-size:14px;
+  font-weight:bold;
+  color:#5d6b72;
+}
 
+#mk-sock-tool .mk-brand img{
+  height:36px;
+  width:auto;
+  display:block;
+}
     
     #mk-sock-tool .mk-tabs{
       display:flex;
@@ -262,6 +276,9 @@
   border-right:6px solid #fff;
   vertical-align:middle;
   word-break:break-word;
+  position: sticky;
+  top: 0;
+  z-index: 2;
 }
 
 #mk-sock-tool th small{
@@ -412,6 +429,7 @@
       #mk-sock-tool .mk-table-card{display:none;}
       #mk-sock-tool .mk-mobile-cards{display:grid;}
       #mk-sock-tool .mk-help{grid-template-columns:1fr;}
+      #mk-sock-tool .mk-brand{width:100%;justify-content:center;}
     }
   </style>
 
@@ -423,18 +441,9 @@
 
   <div class="mk-controls">
 
-<div style="
-display:flex;
-align-items:center;
-gap:10px;
-margin-bottom:14px;
-opacity:.82;
-font-size:14px;
-font-weight:bold;
-color:#5d6b72;
-">
-<img src="mistr-fin-kulate 600.webp" style="height:36px;width:auto;">
-<span>Mistr Klubíčko Tools</span>
+<div class="mk-brand">
+  <img src="mistr-fin-kulate 600.webp" alt="Mr Klubíčko logo">
+  <span>Mistr Klubíčko Tools</span>
 </div>
     
     <div class="mk-tabs" aria-label="Výběr síly příze">
