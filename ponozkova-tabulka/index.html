@@ -153,9 +153,9 @@
       cursor:pointer;
     }
 
-    #mk-sock-tool .mk-grid{
+ #mk-sock-tool .mk-grid{
   display:grid;
-  grid-template-columns:290px minmax(0,1fr);
+  grid-template-columns:300px calc(100% - 314px);
   gap:14px;
   align-items:start;
 }
@@ -231,12 +231,13 @@
     }
 
     #mk-sock-tool .mk-table-card{
-      background:#fff;
-      border:1px solid var(--mk-line);
-      border-radius:28px;
-      box-shadow:var(--mk-shadow);
-      overflow:hidden;
-    }
+  min-width:0;
+  background:#fff;
+  border:1px solid var(--mk-line);
+  border-radius:28px;
+  box-shadow:var(--mk-shadow);
+  overflow:hidden;
+}
 
     #mk-sock-tool .mk-table-scroll{
       overflow-x:auto;
@@ -248,7 +249,7 @@
   table-layout:fixed;
   border-collapse:separate;
   border-spacing:0;
-  min-width:660px;
+  min-width:620px;
 }
 
 #mk-sock-tool th{
@@ -260,6 +261,7 @@
   line-height:1.2;
   border-right:6px solid #fff;
   vertical-align:middle;
+  word-break:break-word;
 }
 
 #mk-sock-tool th small{
@@ -475,7 +477,7 @@ color:#5d6b72;
                 <th>Velikost<small>EU size</small></th>
                 <th>Nahodit<small>celkem / jehlice</small></th>
                 <th>Pata<small>počet ok</small></th>
-                <th>Bumerangová pata<small>rozdělení</small></th>
+                <th style="width:110px;">Bumerangová pata<small>rozdělení</small></th>
                 <th>Začít špičku<small>délka po patě</small></th>
                 <th>Celková délka<small>chodidla</small></th>
               </tr>
